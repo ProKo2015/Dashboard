@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html> 
+	<head>
+	
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Healthcare Praxisprojekt</title>
+		<meta name="author" content="healthcare praxisprojekt">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="js/bootstrap.min.js" rel="javascript"> 
+		<link href="normalize.css" rel="stylesheet">
+		<script src="jquery-2.1.4.min.js"></script>
+		<script src="d3.min.js"></script> 
+		<script src="http://d3js.org/d3.v3.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<link href="d3.css" rel="stylesheet">
+		<link href="styles.css" rel="stylesheet">
+		<script src="d3.layout.cloud.js"></script>
+		
+		 <!-- JQuery-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="jquery-2.1.4.min.js"></script>
+		<script src="jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
+		
+	
+		
+	</head>
+	
+<body>
+
+<div id="wrapper">
+<!-- Navigation -->
+
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+			<!-- optional: HealthCare -->
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav" id="sidebar" class="collapse-in"">
+					<div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-home">
+                            </span><a href="index.html" target="_self">Dashboard</a></a>
+                        </h4>
+                    </div>
+				</div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-comment">
+                            </span>Kommentare<span class="caret"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="accordion-panel-body">
+                            <table class="table">
+							<tbody>
+                                <tr>
+                                    <td>
+                                        <a href="pagealle.html" target="_self">Alle</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="pagepositive.html" target="_self">Positive</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="pagenegative.html" target="_self">Negative</a>
+                                    </td>
+                                </tr>
+								</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-tasks">
+                            </span>Vergleiche<span class="caret"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="accordion-panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="pagetragerschaft.html" target="_self">Trägerschaft Intern</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="pageregion.html" target="_self">Region</a>
+                                    </td>
+                                </tr>
+								
+								<tr>
+                                    <td>
+                                        <a href="jahr.html" target="_self">Jahresübersicht</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                               
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </ul>
+				
+                <ul class="nav navbar-nav navbar-user">
+						<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Gewähltes Krankenhaus <span class="badge"></span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
+                            <li class="divider"></li>
+                            <li> <a href="uniklinikum.html"> Uniklinikum Essen <span class="badge"></span></a> </li>
+                            <li class="divider"></li>
+							<li> <a href="#"> Marienhospital Gelsenkirchen <span class="bagde"></span></a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"> St. Anna Hospital Herne <span class="badge"></span></a></li>
+                        </ul>
+		
+						</li>
+						</ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+						<div id="suche">
+						<form class="navbar-form" role="search">
+						<div class="form-group">
+						<input type="text" class="form-control" placeholder="Suchen...">
+						</div>
+						</form> 
+						</div>
+						
+						</ul>
+                   
+		
+		
+        
+
+				
+                
+            </div>
+        </nav>
+ 
+
+			
+<!-- Inhalt -->
+
+      <div id="page-wrapper">
+			
+		<!-- obere Hälfte --> 
+		<div class="row">
+		
+		<div class="col-md-12">
+		
+		
+		<div class="panel panel-default">
+			  <div class="panel-heading"> <h4> Hier sehen Sie die eine Jahresübersicht Ihrer Bewertungen </h4> </div>
+			  <div class="grafik-panel-body">
+				<div id="dash2">
+				<svg id="visualisation"  width="1050" height="470"></svg>
+				</div>
+			  </div>
+			</div>
+		
+		
+		
+		</div>
+				
+                </div> <!-- Ende row -->
+
+		
+			</div> <!-- Ende Page-Wrapper -->
+
+       
+		
+		<!-- /#wrapper -->
+		</div>
+ 
+    
+
+	 <script>
+	
+	
+//Lalala Linien
+	
+var lineDataGreen = null;
+var lineDataRed = null;
+
+InitChart();
+
+function InitChart() {
+	
+	lineDataGreen = d3.json("dataGreen.json", function(error, data) {
+		lineDataGreen = data;
+		doMoreCode();
+	});
+	
+};
+
+function doMoreCode() {
+	lineDataRed = d3.json("dataRed.json", function(error, data) {
+		lineDataRed = data;
+		doEvenMoreCode();
+	});
+};
+
+function doEvenMoreCode() {
+		
+	// Vergleich der beiden Datensätze um den insgesamt HÖCHSTEN Wert zu finden
+	var greenMax = d3.max(lineDataGreen, function (d) {
+        return d.Monat_gesamt;
+      });	
+	var redMax = d3.max(lineDataRed, function (d) {
+        return d.Monat_gesamt;
+      });
+	  
+	function findMax() {
+	
+		if(redMax > greenMax) {
+		
+			return redMax;
+		
+		} else {
+		
+			return greenMax;
+		
+		}
+	
+	}
+		
+	var vis = d3.select("#visualisation"),
+	// Größe und Abstände des Graphen
+    WIDTH = 990,
+    HEIGHT = 430,
+    MARGINS = {
+      top: 20,
+      right: 20,
+      bottom: 20,
+      left: 50
+    },
+	
+	// Das Maß der X-Achse
+    xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(lineDataGreen, function (d) {
+        return 1;
+      }),
+      d3.max(lineDataGreen, function (d) {
+        return 12;
+      })
+    ]),
+	
+	// Das Maß der Y-Achse
+    yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(lineDataGreen, function (d) {
+        return 0;
+      }),
+      findMax()
+    ]),
+	// Anlegen der beiden Achsen
+    xAxis = d3.svg.axis()
+      .scale(xRange)
+      .tickSize(20)
+	  .tickSubdivide(true),
+
+    yAxis = d3.svg.axis()
+      .scale(yRange)
+      .tickSize(5)
+      .orient("left")
+      .tickSubdivide(true);
+
+	// Hinzufügen der Achsen
+	vis.append("svg:g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+		.call(xAxis);
+	
+	// Label für X-Achse
+	vis.append("text")      
+        .attr("x", 980 )
+        .attr("y",  400 )
+        .style("text-anchor", "middle")
+        .text("Monat");
+
+	
+	vis.append("svg:g")
+		.attr("class", "y axis")
+		.attr("transform", "translate(" + (MARGINS.left) + ",0)")
+		.call(yAxis);
+	
+	// Label für Y-Achse
+	vis.append("text")      
+        .attr("x", 70 )
+        .attr("y",  12 )
+        .style("text-anchor", "middle")
+        .text("Bewertungen");
+	
+		vis.append("rect")      
+        .attr("width", 950 )
+        .attr("height",  30 )
+        .attr("y", 500)
+		.attr("x", 40)
+        .attr("fill", "#eee");
+		
+	vis.append("text")      
+        .attr("x", 50 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Januar");
+		
+	vis.append("text")      
+        .attr("x", 135 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Februar");
+	
+	vis.append("text")      
+        .attr("x", 220 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("März");
+
+	vis.append("text")      
+        .attr("x", 301 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("April");
+
+	vis.append("text")      
+        .attr("x", 385 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Mai");		
+		
+	vis.append("text")      
+        .attr("x", 470 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Juni");
+		
+	vis.append("text")      
+        .attr("x", 555 )
+        .attr("y", 460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Juli");	
+			
+	vis.append("text")      
+        .attr("x", 640 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("August");
+		
+	vis.append("text")      
+        .attr("x", 725 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("September");	
+		
+	vis.append("text")      
+        .attr("x", 810 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Oktober");	
+	
+	vis.append("text")      
+        .attr("x", 895 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("November");	
+	
+	vis.append("text")      
+        .attr("x", 980 )
+        .attr("y",  460 )
+        .style("text-anchor", "middle")
+		.attr("fill", "black")
+        .text("Dezember");	
+	
+	
+	// Einbinden der grünen Daten in den Graphen
+	var lineFuncGreen = d3.svg.line()
+		.x(function (d) {
+		return xRange(d.count);
+	})
+		.y(function (d) {
+		return yRange(d.Monat_gesamt);
+	})
+		.interpolate('linear');
+
+	vis.append("svg:path")
+		.attr("d", lineFuncGreen(lineDataGreen))
+		.attr("stroke", "green")
+		.attr("stroke-width", 2)
+		.attr("fill", "none");
+
+
+	// Einbinden der roten Daten in den Graphen
+	var lineFuncRed = d3.svg.line()
+		.x(function (d) {
+		return xRange(d.count);
+	})
+		.y(function (d) {
+		return yRange(d.Monat_gesamt);
+	})
+		.interpolate('linear');
+
+	vis.append("svg:path")
+		.attr("d", lineFuncRed(lineDataRed))
+		.attr("stroke", "red")
+		.attr("stroke-width", 2)
+		.attr("fill", "none")
+
+}
+
+
+	</script>
+						  
+						  
+
+
+  
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+	<script >
+
+	<!-- zum Verstecken von Inhalten -->
+	
+	$(document).ready(function(){
+    $(".btn-primary").click(function(){
+        $(".collapse").collapse('toggle');
+    });
+    $(".btn-success").click(function(){
+        $(".collapse").collapse('show');
+    });
+    $(".btn-warning").click(function(){
+        $(".collapse").collapse('hide');
+    });
+});
+
+	<!-- Zum Öffnen und Schließen Accordion Bewertung und Empfehlung -->
+	$('#accordion1 .collapse').on('show.bs.collapse', function () {
+  $('#accordion1 .collapse.in').collapse('hide');
+});
+
+<!-- für Popover für mehr Infos-->
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('body').on('click', function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+	</script>
+</body>
+</html>

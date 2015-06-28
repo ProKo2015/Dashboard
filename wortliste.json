@@ -1,15 +1,15 @@
 {
   "worte": [
-    { "text": "Infektion", "size": 1 },
-    { "text": "Wartezeit", "size": 5 },
-    { "text": "Beschwerde", "size": 10 },
-    { "text": "Hygiene", "size": 20 },
-    { "text": "Inkompetenz", "size": 40 },
-    { "text": "Resistenz", "size": 80 },
-    { "text": "Erreger", "size": 50 },
-    { "text": "Antibiotika", "size": 60 },
-    { "text": "Qualität", "size": 30 },
-    { "text": "Beratung", "size": 70 },
-    { "text": "Krankenversicherung", "size": 90 }
+    { "wort": "Infektion", "haeufigkeit": 1 },
+    { "wort": "Wartezeit", "haeufigkeit": 5 },
+    { "wort": "Beschwerde", "haeufigkeit": 10 },
+    { "wort": "Hygiene", "haeufigkeit": 20 },
+    { "wort": "Inkompetenz", "haeufigkeit": 40 },
+    { "wort": "Resistenz", "haeufigkeit": 80 },
+    { "wort": "Erreger", "haeufigkeit": 50 },
+    { "wort": "Antibiotika", "haeufigkeit": 60 },
+    { "wort": "Qualität", "haeufigkeit": 30 },
+    { "wort": "Beratung", "haeufigkeit": 70 },
+    { "wort": "Krankenversicherung", "haeufigkeit": 90 }
   ]
 }

@@ -1,3 +1,11 @@
+#logo{
+    height:40px;
+	margin-top: 15px; 
+	padding-bottom: 2px; 
+	margin-right: -4px; 
+   
+}
+
 body {
   margin-top: 70px;
 	overflow: scroll;

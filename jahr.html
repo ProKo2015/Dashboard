@@ -25,7 +25,7 @@
 		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
 		
 	
-		
+	
 	</head>
 	
 <body>
@@ -164,7 +164,7 @@
 		
 		
 		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Hier sehen Sie die eine Jahresübersicht Ihrer Bewertungen </h4> </div>
+			  <div class="panel-heading"> <h4> Hier sehen Sie die Jahresübersicht Ihrer Bewertungen </h4> </div>
 			  <div class="grafik-panel-body">
 				<div id="dash2">
 				<svg id="visualisation"  width="1050" height="470"></svg>
@@ -193,243 +193,136 @@
 	
 //Lalala Linien
 	
-var lineDataGreen = null;
-var lineDataRed = null;
 
-InitChart();
 
-function InitChart() {
-	
-	lineDataGreen = d3.json("dataGreen.json", function(error, data) {
-		lineDataGreen = data;
-		doMoreCode();
+// Set the dimensions of the canvas / graph
+var	margin = {top: 60, right: 20, bottom: 30, left: 50},
+	width = 800 - margin.left - margin.right,
+	height = 400 - margin.top - margin.bottom;
+
+// Parse the date / time
+var	parseDate = d3.time.format("%d-%b-%y").parse;
+var formatTime = d3.time.format("%e %B");// Format tooltip date / time
+
+// Set the ranges
+var	x = d3.time.scale().range([0, width]);
+var	y = d3.scale.linear().range([height, 0]);
+
+
+// Define the axes
+var	xAxis = d3.svg.axis().scale(x)
+	.orient("bottom").ticks(5);
+
+var	yAxis = d3.svg.axis().scale(y)
+	.orient("left").ticks(5);
+
+// Define the line
+var	valueline = d3.svg.line()
+	.x(function(d) { return x(d.monat); })
+	.y(function(d) { return y(d.anzahlPos); });
+
+var	valueline2 = d3.svg.line()
+	.x(function(d) { return x(d.monat); })
+	.y(function(d) { return y(d.anzahlNeg); });
+
+// Define 'div' for tooltips
+var div = d3.select("#visualisation")
+	.append("div")  // declare the tooltip div 
+	.attr("class", "tooltip")              // apply the 'tooltip' class
+	.style("opacity", 0);                  // set the opacity to nil
+
+// Adds the svg canvas
+var	svg = d3.select("#visualisation")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", 
+		      "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.json("LineChartData.json", function(error, data) {
+	data.forEach(function(d) {
+		d.monat = parseDate(d.monat);
+		d.anzahlPos = +d.anzahlPos;
+		d.anzahlNeg = +d.anzahlNeg;
 	});
-	
-};
 
-function doMoreCode() {
-	lineDataRed = d3.json("dataRed.json", function(error, data) {
-		lineDataRed = data;
-		doEvenMoreCode();
-	});
-};
+	// Scale the range of the data
+	x.domain(d3.extent(data, function(d) { return d.monat; }));
+	y.domain([0, d3.max(data, function(d) { return d.anzahlPos; })]);
 
-function doEvenMoreCode() {
-		
-	// Vergleich der beiden Datensätze um den insgesamt HÖCHSTEN Wert zu finden
-	var greenMax = d3.max(lineDataGreen, function (d) {
-        return d.Monat_gesamt;
-      });	
-	var redMax = d3.max(lineDataRed, function (d) {
-        return d.Monat_gesamt;
-      });
-	  
-	function findMax() {
-	
-		if(redMax > greenMax) {
-		
-			return redMax;
-		
-		} else {
-		
-			return greenMax;
-		
-		}
-	
-	}
-		
-	var vis = d3.select("#visualisation"),
-	// Größe und Abstände des Graphen
-    WIDTH = 990,
-    HEIGHT = 430,
-    MARGINS = {
-      top: 20,
-      right: 20,
-      bottom: 20,
-      left: 50
-    },
-	
-	// Das Maß der X-Achse
-    xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(lineDataGreen, function (d) {
-        return 1;
-      }),
-      d3.max(lineDataGreen, function (d) {
-        return 12;
-      })
-    ]),
-	
-	// Das Maß der Y-Achse
-    yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(lineDataGreen, function (d) {
-        return 0;
-      }),
-      findMax()
-    ]),
-	// Anlegen der beiden Achsen
-    xAxis = d3.svg.axis()
-      .scale(xRange)
-      .tickSize(20)
-	  .tickSubdivide(true),
-
-    yAxis = d3.svg.axis()
-      .scale(yRange)
-      .tickSize(5)
-      .orient("left")
-      .tickSubdivide(true);
-
-	// Hinzufügen der Achsen
-	vis.append("svg:g")
-		.attr("class", "x axis")
-		.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-		.call(xAxis);
-	
-	// Label für X-Achse
-	vis.append("text")      
-        .attr("x", 980 )
-        .attr("y",  400 )
-        .style("text-anchor", "middle")
-        .text("Monat");
-
-	
-	vis.append("svg:g")
-		.attr("class", "y axis")
-		.attr("transform", "translate(" + (MARGINS.left) + ",0)")
-		.call(yAxis);
-	
-	// Label für Y-Achse
-	vis.append("text")      
-        .attr("x", 70 )
-        .attr("y",  12 )
-        .style("text-anchor", "middle")
-        .text("Bewertungen");
-	
-		vis.append("rect")      
-        .attr("width", 950 )
-        .attr("height",  30 )
-        .attr("y", 500)
-		.attr("x", 40)
-        .attr("fill", "#eee");
-		
-	vis.append("text")      
-        .attr("x", 50 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Januar");
-		
-	vis.append("text")      
-        .attr("x", 135 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Februar");
-	
-	vis.append("text")      
-        .attr("x", 220 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("März");
-
-	vis.append("text")      
-        .attr("x", 301 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("April");
-
-	vis.append("text")      
-        .attr("x", 385 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Mai");		
-		
-	vis.append("text")      
-        .attr("x", 470 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Juni");
-		
-	vis.append("text")      
-        .attr("x", 555 )
-        .attr("y", 460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Juli");	
-			
-	vis.append("text")      
-        .attr("x", 640 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("August");
-		
-	vis.append("text")      
-        .attr("x", 725 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("September");	
-		
-	vis.append("text")      
-        .attr("x", 810 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Oktober");	
-	
-	vis.append("text")      
-        .attr("x", 895 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("November");	
-	
-	vis.append("text")      
-        .attr("x", 980 )
-        .attr("y",  460 )
-        .style("text-anchor", "middle")
-		.attr("fill", "black")
-        .text("Dezember");	
-	
-	
-	// Einbinden der grünen Daten in den Graphen
-	var lineFuncGreen = d3.svg.line()
-		.x(function (d) {
-		return xRange(d.count);
-	})
-		.y(function (d) {
-		return yRange(d.Monat_gesamt);
-	})
-		.interpolate('linear');
-
-	vis.append("svg:path")
-		.attr("d", lineFuncGreen(lineDataGreen))
+	// Add the valueline path.
+	svg.append("svg:path")		
+		.attr("d", valueline(data))
 		.attr("stroke", "green")
-		.attr("stroke-width", 2)
-		.attr("fill", "none");
-
-
-	// Einbinden der roten Daten in den Graphen
-	var lineFuncRed = d3.svg.line()
-		.x(function (d) {
-		return xRange(d.count);
-	})
-		.y(function (d) {
-		return yRange(d.Monat_gesamt);
-	})
-		.interpolate('linear');
-
-	vis.append("svg:path")
-		.attr("d", lineFuncRed(lineDataRed))
+		.attr("stroke-width", 2);
+	
+	svg.append("path")		
+		.attr("d", valueline2(data))
 		.attr("stroke", "red")
-		.attr("stroke-width", 2)
-		.attr("fill", "none")
+		.attr("stroke-width", 2);
 
-}
+	// draw the scatterplot
+	svg.selectAll("dot")									
+		.data(data)											
+	.enter().append("circle")								
+		.attr("r", 5)	
+		.attr("cx", function(d) { return x(d.monat); })		 
+		.attr("cy", function(d) { return y(d.anzahlPos); })
+	// Tooltip stuff after this
+	    .on("mouseover", function(d) {		
+            div.transition()
+				.duration(500)	
+				.style("opacity", 0);
+			div.transition()
+				.duration(200)	
+				.style("opacity", .9);	
+			div.html(                      
+				"positive Kommentare: "  + d.anzahlPos)	 
+				.style("left", (d3.event.pageX) + "px")			 
+				.style("top", (d3.event.pageY - 50) + "px");
+			})
+			.on("mouseout", function(d) {
+				d3.select(this).select("path").transition()
+					.duration(200)
+					.attr("d", arc);
+			
+				});
 
+	
+	svg.selectAll("dot")									
+		.data(data)											
+	.enter().append("circle")								
+		.attr("r", 5)	
+		.attr("cx", function(d) { return x(d.monat); })		 
+		.attr("cy", function(d) { return y(d.anzahlNeg); })
+	// Tooltip stuff after this
+	    .on("mouseover", function(d) {		
+            div.transition()
+				.duration(500)	
+				.style("opacity", 0);
+			div.transition()
+				.duration(200)	
+				.style("opacity", .9);	
+			div	.html(
+				"negative Kommentare: "  + d.anzahlNeg)	 
+				.style("left", (d3.event.pageX) + "px")			 
+				.style("top", (d3.event.pageY - 20) + "px");
+			});
 
+	// Add the X Axis
+	svg.append("g")	
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	svg.append("g")	
+		.attr("class", "y axis")
+		.call(yAxis);
+
+});
 	</script>
 						  
 						  

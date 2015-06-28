@@ -200,8 +200,7 @@
 
 		var xAxis = d3.svg.axis()
 		    .scale(x)
-		    .orient("bottom")
-			;
+		    .orient("bottom");
 			
 	/* EINGEFÜGT UNTEN: ODER um Beschriftung zu drehen: svg.append("g")
         .attr("class", "x axis")
@@ -227,9 +226,9 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			//.attr("fill", function(d, i) { return color(i); } );
 
-				d3.json("InnerhalbTrägerschaftBewertungen.json", function(error, data) {
-		  x.domain(data.map(function(d) { return d.Art; }));
-		  y.domain([0, d3.max(data, function(d) { return d.Wert; })]); //einbindung des DatenArrays
+				d3.json("http://134.91.18.177:5000/diagramm_tr", function(error, data) {
+		  x.domain(data.map(function(d) { return d.id_krankenhaus; }));
+		  y.domain([0, d3.max(data, function(d) { return d.rating_gesamt; })]); //einbindung des DatenArrays
 		  
 		  
 		
@@ -260,13 +259,13 @@
 		      .data(data)
 		    .enter().append("rect")
 		      .attr("class", "bar")
-		      .attr("x", function(d) { return x(d.Art); })
+		      .attr("x", function(d) { return x(d.id_krankenhaus); })
 		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.Wert); })
-		      .attr("height", function(d) { return height - y(d.Wert);})
+		      .attr("y", function(d) { return y(d.rating_gesamt); })
+		      .attr("height", function(d) { return height - y(d.rating_gesamt);})
 			  .attr("fill", function (d) {
-				if(d.Wert >=3.5) return "#00ff00";
-						else if (d.Wert >= 3) return "#B5B5B5";
+				if(d.rating_gesamt >=3.5) return "#00ff00";
+						else if (d.rating_gesamt >= 3) return "#B5B5B5";
 							else return "#EE0000";
 							});
 				
@@ -276,7 +275,7 @@
 		});
 
 		function type(d) {
-		  d.Wert = +d.Wert;
+		  d.rating_gesamt = +d.rating_gesamt;
 		  return d;
 		}
 		//http://bl.ocks.org/mbostock/3885304

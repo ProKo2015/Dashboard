@@ -21,6 +21,38 @@
     }
    
 */
+/* Line ChartNEU*/
+
+.line path { 
+	
+	stroke-width: 2;
+	fill: none;
+}
+
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: grey;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+
+
+div.tooltip {
+  position: absolute;	
+  text-align: center;	
+  width: 70px;	
+  height: 45px;		
+  padding: 2px;	
+  font: 12px sans-serif;	
+  background: lightgrey;	
+  border: 0px;					
+  border-radius: 8px;
+ /*  pointer-events: none;	This line needs to be removed */
+	
+}
+
 
 /* Säulendiagramm */
 
@@ -80,7 +112,7 @@
 
 
 /*Kurven*/
-
+/*
 
         .axis path, .axis line
         {
@@ -94,7 +126,7 @@
             font-family: 'Arial';
             font-size: 13px;
         } */
-        .tick
+     /*   .tick
         {
             stroke-dasharray: 1, 2;
         }
@@ -102,7 +134,7 @@
         {
             fill: FireBrick;
         }
-       
+       */
 /* Collapsible Portalbewertung */
 
 div#id1 {

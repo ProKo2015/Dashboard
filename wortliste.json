@@ -1,0 +1,15 @@
+{
+  "worte": [
+    { "text": "Infektion", "size": 1 },
+    { "text": "Wartezeit", "size": 5 },
+    { "text": "Beschwerde", "size": 10 },
+    { "text": "Hygiene", "size": 20 },
+    { "text": "Inkompetenz", "size": 40 },
+    { "text": "Resistenz", "size": 80 },
+    { "text": "Erreger", "size": 50 },
+    { "text": "Antibiotika", "size": 60 },
+    { "text": "Qualität", "size": 30 },
+    { "text": "Beratung", "size": 70 },
+    { "text": "Krankenversicherung", "size": 90 }
+  ]
+}

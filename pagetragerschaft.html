@@ -186,9 +186,9 @@
 
 		<script>
 		
-		var margin = {top: 20, right: 20, bottom: 100, left: 75},
+		var margin = {top: 20, right: 20, bottom: 100, left: 30},
 		    width = 800 - margin.left - margin.right,
-		    height = 470 - margin.top - margin.bottom;
+		    height = 500 - margin.top - margin.bottom;
 			
 		
 
@@ -200,7 +200,8 @@
 
 		var xAxis = d3.svg.axis()
 		    .scale(x)
-		    .orient("bottom");
+		    .orient("bottom")
+			;
 			
 	/* EINGEFÜGT UNTEN: ODER um Beschriftung zu drehen: svg.append("g")
         .attr("class", "x axis")
@@ -217,7 +218,7 @@
 		var yAxis = d3.svg.axis()
 		    .scale(y)
 		    .orient("left")
-		    .ticks(5);
+		    .ticks(20);
 		
 		var svg = d3.select("div#balken").append("svg")
 		    .attr("width", width + margin.left + margin.right)
@@ -253,7 +254,7 @@
 		      .attr("y", 6)
 		      .attr("dy", ".71em")
 		      .style("text-anchor", "end")
-		      .text("Bewertung");
+		      .text("Bewertung in Prozent");
 
 		  svg.selectAll(".bar")
 		      .data(data)
@@ -264,8 +265,8 @@
 		      .attr("y", function(d) { return y(d.rating_gesamt); })
 		      .attr("height", function(d) { return height - y(d.rating_gesamt);})
 			  .attr("fill", function (d) {
-				if(d.rating_gesamt >=3.5) return "#00ff00";
-						else if (d.rating_gesamt >= 3) return "#B5B5B5";
+				if(d.rating_gesamt >=75) return "#00ff00";
+						else if (d.rating_gesamt >= 50) return "#B5B5B5";
 							else return "#EE0000";
 							});
 				

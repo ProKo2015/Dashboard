@@ -187,7 +187,12 @@
 							.enter().append("div");
 
 						comments.append("text")
-							.text(function(d) { return d.kommentar; });
+							.text(function(d) {return d.datum +":\n";});
+						
+						comments.append("text")
+							.text(function(d) { return d.kommentar +" "; });
+						comments.append("text")
+							.text(function(d) { return d.url; });
 					});
 				</script>
             <!--</div>-->
@@ -217,7 +222,12 @@
 							.enter().append("div");
 
 						comments.append("text")
-							.text(function(d) { return d.kommentar; });
+							.text(function(d) {return d.datum +":\n";});
+						
+						comments.append("text")
+							.text(function(d) { return d.kommentar +" "; });
+						comments.append("text")
+							.text(function(d) { return d.url; });
 					});
 				</script>
         </div>
@@ -243,7 +253,12 @@
 							.enter().append("div");
 
 						comments.append("text")
-							.text(function(d) { return d.kommentar; });
+							.text(function(d) {return d.datum +":\n";});
+						
+						comments.append("text")
+							.text(function(d) { return d.kommentar +" "; });
+						comments.append("text")
+							.text(function(d) { return d.url; });
 					});
 				</script>
 			</div>

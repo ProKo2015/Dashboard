@@ -1,5 +1,4 @@
-{
-  "worte": [
+[
     { "wort": "Infektion", "haeufigkeit": 1 },
     { "wort": "Wartezeit", "haeufigkeit": 5 },
     { "wort": "Beschwerde", "haeufigkeit": 10 },
@@ -12,4 +11,3 @@
     { "wort": "Beratung", "haeufigkeit": 70 },
     { "wort": "Krankenversicherung", "haeufigkeit": 90 }
   ]
-}

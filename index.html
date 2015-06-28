@@ -204,9 +204,12 @@
 							.selectAll("g")
 							.data(data)
 							.enter().append("div");
-
+						
 						comments.append("text")
-							.text(function(d) { return d.kommentar; });
+							.text(function(d) {return d.datum +":\n";});
+						
+						comments.append("text")
+							.text(function(d) { return d.kommentar +" "; });
 						comments.append("text")
 							.text(function(d) { return d.url; });
 					});
@@ -372,7 +375,7 @@ var weiterempfehlungTop = d3.select("#headerWeiterempfehlung").append("div")
 	r = 100,
 	inner = 40,
 	color = d3.scale.ordinal()
-		.range([ "#00ff00", "#848484", "#CD0000"]);
+		.range(["#848484", "#CD0000","#40E140"]);
 
 var total = 0;
 

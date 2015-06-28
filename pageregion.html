@@ -56,7 +56,7 @@
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="accordion-panel-body">
+                        <div class="panel-body">
                             <table class="table">
 							<tbody>
                                 <tr>
@@ -83,12 +83,51 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-edit">
+                            </span>Plattform<span class="caret"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+							<tbody>
+							<tr>
+                                    <td>
+                                        <a href="uebersicht.html" target="_self">Übersicht</a>
+                                    </td>
+                                </tr>
+                                <tr>
+							
+                                <tr>
+                                    <td>
+                                        <a href="pageklinikbewertungen.html" target="_self">Klinikbewertungen.de</a>
+                                    </td>
+                                </tr>
+                                
+								<tr>
+                                    <td>
+                                        <a href="pageweisseliste.html" target="_self">Weisse Liste</a>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <a href="pagekliniken.html" target="_self">Kliniken.de</a>
+                                    </td>
+                                </tr>
+								</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-tasks">
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse">
-                        <div class="accordion-panel-body">
+                        <div class="panel-body">
                             <table class="table">
                                 <tr>
                                     <td>
@@ -116,11 +155,13 @@
                 </ul>
 				
                 <ul class="nav navbar-nav navbar-user">
+				
+			<li>
+		    <a data-toggle="collapse" href="#sidebar"><i class="glyphicon glyphicon-menu-hamburger" id="hamburgerbutton"></i></a>
+		    </li>
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Gewähltes Krankenhaus <span class="badge"></span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Wahl des Krankenhauses <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
-                            <li class="divider"></li>
                             <li> <a href="uniklinikum.html"> Uniklinikum Essen <span class="badge"></span></a> </li>
                             <li class="divider"></li>
 							<li> <a href="#"> Marienhospital Gelsenkirchen <span class="bagde"></span></a></li>
@@ -132,13 +173,11 @@
 						</ul>
 						
 						<ul class="nav navbar-nav navbar-right">
-						<div id="suche">
-						<form class="navbar-form" role="search">
-						<div class="form-group">
+						<form class="navbar-form navbar-right" role="search">
+						<div class="form-group navbar-right" >
 						<input type="text" class="form-control" placeholder="Suchen...">
 						</div>
 						</form> 
-						</div>
 						
 						</ul>
                    
@@ -148,46 +187,26 @@
 
 				
                 
-            </div>
+            
         </nav>
  
 
 			
 <!-- Inhalt -->
 
-      <div id="page-wrapper">
-			
+      <div id="page-wrapper>
+          
 		<!-- obere Hälfte --> 
 		<div class="row">
+		   <div class="col-lg-12">
+		   
+				<h3 ID=Ueberschrift> <br> <br><br> Hier sehen Sie Ihre Klinik im Vergleich zu den anderen Ihrer Region </h3>
+			<div class="container" id="balken">
+		<script>
 		
-		<div class="col-md-12">
-		
-		
-		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Hier sehen Sie Ihre Klinik im Vergleich zu den anderen in Ihrer Region </h4> </div>
-			  <div class="grafik-panel-body">
-				<div class="container" id="balken"> </div>
-			  </div>
-			</div>
-		
-		
-		
-		</div>
-				
-                </div> <!-- Ende row -->
-
-		
-			</div> <!-- Ende Page-Wrapper -->
-
-       
-		
-		<!-- /#wrapper -->
-		</div>
- 
-	<script>
-		var margin = {top: 20, right: 20, bottom: 100, left: 65},
-		    width = 600 - margin.left - margin.right,
-		    height = 470 - margin.top - margin.bottom;
+		var margin = {top: 20, right: 20, bottom: 100, left: 75},
+		    width = 800 - margin.left - margin.right,
+		    height = 500 - margin.top - margin.bottom;
 			
 		
 
@@ -202,12 +221,22 @@
 		    .orient("bottom")
 			;
 			
-	
+	/* EINGEFÜGT UNTEN: ODER um Beschriftung zu drehen: svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                }); */
 
 		var yAxis = d3.svg.axis()
 		    .scale(y)
 		    .orient("left")
-		    .ticks(5);
+		    .ticks(20);
 		
 		var svg = d3.select("div#balken").append("svg")
 		    .attr("width", width + margin.left + margin.right)
@@ -216,9 +245,9 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			//.attr("fill", function(d, i) { return color(i); } );
 
-			d3.json("RegionBewertung.json", function(error, data) {
-		  x.domain(data.map(function(d) { return d.Art; }));
-		  y.domain([0, d3.max(data, function(d) { return d.Wert; })]); //einbindung des DatenArrays
+				d3.json("http://134.91.18.177:5000/diagramm_re", function(error, data) {
+		  x.domain(data.map(function(d) { return d.id_krankenhaus; }));
+		  y.domain([0, d3.max(data, function(d) { return d.rating_gesamt; })]); //einbindung des DatenArrays
 		  
 		  
 		
@@ -243,19 +272,19 @@
 		      .attr("y", 6)
 		      .attr("dy", ".71em")
 		      .style("text-anchor", "end")
-		      .text("Bewertung");
+		      .text("Bewertung in Prozent");
 
 		  svg.selectAll(".bar")
 		      .data(data)
 		    .enter().append("rect")
 		      .attr("class", "bar")
-		      .attr("x", function(d) { return x(d.Art); })
+		      .attr("x", function(d) { return x(d.id_krankenhaus); })
 		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.Wert); })
-		      .attr("height", function(d) { return height - y(d.Wert);})
+		      .attr("y", function(d) { return y(d.rating_gesamt); })
+		      .attr("height", function(d) { return height - y(d.rating_gesamt);})
 			  .attr("fill", function (d) {
-				if(d.Wert >=3.5) return "#00ff00";
-						else if (d.Wert >= 3) return "#B5B5B5";
+				if(d.rating_gesamt >=75) return "#00ff00";
+						else if (d.rating_gesamt >= 50) return "#B5B5B5";
 							else return "#EE0000";
 							});
 				
@@ -265,17 +294,30 @@
 		});
 
 		function type(d) {
-		  d.Wert = +d.Wert;
+		  d.rating_gesamt = +d.rating_gesamt;
 		  return d;
 		}
 		//http://bl.ocks.org/mbostock/3885304
 		</script>
-    
+	</div>
 
+				
+			</div>
+			
+			</div>
 
-						  
-						  
+		</div> <!-- Ende row-->
+					
+				<!-- untere Hälfte --> 
+			
+			</div> <!-- Ende Page-Wrapper -->
 
+       
+		
+		<!-- /#wrapper -->
+		</div>
+ 
+ 
 
   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -299,25 +341,6 @@
     });
 });
 
-	<!-- Zum Öffnen und Schließen Accordion Bewertung und Empfehlung -->
-	$('#accordion1 .collapse').on('show.bs.collapse', function () {
-  $('#accordion1 .collapse.in').collapse('hide');
-});
-
-<!-- für Popover für mehr Infos-->
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-$('body').on('click', function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        //the 'is' for buttons that trigger popups
-        //the 'has' for icons within a button that triggers a popup
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-            $(this).popover('hide');
-        }
-    });
-});
 	</script>
 </body>
 </html>

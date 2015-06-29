@@ -62,7 +62,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-comment">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-cloud">
                             </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
                         </h4>
                     </div>
@@ -110,15 +110,22 @@
 				
                 <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Gewähltes Krankenhaus <span class="badge"></span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
                             <li class="divider"></li>
-                            <li> <a href="uniklinikum.html"> Uniklinikum Essen <span class="badge"></span></a> </li>
+                            <li> <a href="#"> Universitätsklinikum Düsseldorf<span class="badge"></span></a> </li>
                             <li class="divider"></li>
-							<li> <a href="#"> Marienhospital Gelsenkirchen <span class="bagde"></span></a></li>
+							<li> <a href="#"> Klinikum Dortmund GmbH <span class="bagde"></span></a></li>
                             <li class="divider"></li>
-                            <li><a href="#"> St. Anna Hospital Herne <span class="badge"></span></a></li>
+                            <li><a href="#"> St. Josef Krankenhaus GmbH<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="#"> Alexianer Krefeld GmbH Maria-Hilf<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="#"> Katholisches Klinikum Essen Philippusstift<span class="badge"></span></a></li>
+							 <li class="divider"></li>
+                            <li><a href="startseite.html"> Zurück zur Startseite<span class="badge"></span></a></li>
+							
                         </ul>
 		
 						</li>
@@ -158,7 +165,7 @@
 		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		  Allgemeines Stimmungsbild der letzten 7 Tage <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Sentimentanalyse der Kommentare von Klinikbewertungen.de und Kliniken.de"></span>
+		  Allgemeines Stimmungsbild des letzten Monats <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Sentimentanalyse der Kommentare von Klinikbewertungen.de und Kliniken.de"></span>
 			</div>
 		  <div class="panel-body">
 			  <div id="dash1" class="grey">
@@ -174,7 +181,7 @@
 	    <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
-                            Newsfeed <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Eingegangene Kommentare der letzten 7 Tage auf kliniken.de, klinikbewertungen.de und weisse-liste.de"></span>
+                            Newsfeed  <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Eingegangene Kommentare der letzten 7 Tage auf kliniken.de, klinikbewertungen.de und weisse-liste.de"></span>
                            
                         </div>
                         <!-- /.panel-heading -->
@@ -240,10 +247,10 @@
 				
 				<div class="panel panel-default">
 				  <div class="panel-heading">
-					Die 10 häufigsten Wörter der letzten 7 Tage<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Worthäufigkeitsanalyse der Kommentare von Klinikbewertungen.de und Kliniken.de"></span>
+					Die 10 häufigsten Wörter des letzten Monats<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Worthäufigkeitsanalyse der Kommentare von Klinikbewertungen.de und Kliniken.de"></span>
 					</div>
 				  <div class="panel-body">
-						<div id="dash2" class="grey">
+						<div id="dash2" class="greyCloud">
 				  </div>
 				</div>
 				</div>
@@ -362,7 +369,7 @@ var weiterempfehlungTop = d3.select("#headerWeiterempfehlung").append("div")
 	r = 100,
 	inner = 40,
 	color = d3.scale.ordinal()
-		.range(["#848484", "#CD0000","#40E140"]);
+		.range([ "#40E140","#848484", "#CD0000"]);
 
 var total = 0;
 
@@ -464,14 +471,14 @@ legendDonut.append("text")
 
 //Wordcloud
    
-d3.json("wortliste.json", function(error, data) {	
+d3.json("http://134.91.18.177:5000/worthaeufigkeit_kh1", function(error, data) {	
 	
 		 var color = d3.scale.linear()
             var color = d3.scale.linear()
             .domain([0,1,2,3,4,5,6,10,15,20,100])
-			.range(["#ccccff", "#b2b2ff", "#9999ff", "#7f7fff", "#6666ff", "#4c4cff", "#3232ff", "#1919ff", "#0000ff"]);
+			.range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
 			
-		d3.layout.cloud().size([600, 100])
+		d3.layout.cloud().size([450, 350])
 				.words(data)
 				.rotate(0)
 				.fontSize(function(d) { return d.haeufigkeit + 15; })
@@ -480,13 +487,13 @@ d3.json("wortliste.json", function(error, data) {
 
 		function draw(words) {
 			d3.select("#dash2").append("svg")
-					.attr("width", 650)
-					.attr("height", 250)
+					.attr("width", 500)
+					.attr("height", 220)
 					.attr("class", "wordcloud")
 					.append("g")
 					// without the transform, words would get cutoff to the left and top, they would
 					// appear outside of the SVG area
-					.attr("transform", "translate(210,100)")
+					.attr("transform", "translate(100,130)")
 					.selectAll("text")
 					.data(words)
 					.enter().append("text")

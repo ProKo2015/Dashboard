@@ -1,4 +1,12 @@
+.glyphicon {
+	float: left; 
+}
 
+.cloud-panel-body {
+	height: 450px;
+	text-align: center;
+	background-color: #E6E6E6;
+ }
 
 /* Im Accordionmenü */
 #aktuell {

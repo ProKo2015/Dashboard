@@ -14,7 +14,7 @@
 		<script src="d3.min.js"></script> 
 		<script src="http://d3js.org/d3.v3.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<link href="d3.css" rel="stylesheet">
+		<link href="line.css" rel="stylesheet">
 		<link href="styles.css" rel="stylesheet">
 		<script src="d3.layout.cloud.js"></script>
 		
@@ -27,7 +27,9 @@
 	
 	
 	</head>
+
 	
+
 <body>
 
 <div id="wrapper">
@@ -61,7 +63,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-comment">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-cloud">
                             </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
                         </h4>
                     </div>
@@ -109,26 +111,33 @@
 				
                 <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Gewähltes Krankenhaus <span class="badge"></span> <b class="caret"></b></a>
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
                             <li class="divider"></li>
-                            <li> <a href="uniklinikum.html"> Uniklinikum Essen <span class="badge"></span></a> </li>
+                            <li> <a href="#"> Universitätsklinikum Düsseldorf<span class="badge"></span></a> </li>
                             <li class="divider"></li>
-							<li> <a href="#"> Marienhospital Gelsenkirchen <span class="bagde"></span></a></li>
+							<li> <a href="#"> Klinikum Dortmund GmbH <span class="bagde"></span></a></li>
                             <li class="divider"></li>
-                            <li><a href="#"> St. Anna Hospital Herne <span class="badge"></span></a></li>
+                            <li><a href="#"> St. Josef Krankenhaus GmbH<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="#"> Alexianer Krefeld GmbH Maria-Hilf<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="#"> Katholisches Klinikum Essen Philippusstift<span class="badge"></span></a></li>
+							 <li class="divider"></li>
+                            <li><a href="startseite.html"> Zurück zur Startseite<span class="badge"></span></a></li>
+							
                         </ul>
 		
 						</li>
 						</ul>
-						
+						<ul class="nav navbar-nav navbar-right">
 						<li>
 						<img src="Logo_HSMM.png" id="logo"> </img>
 						</li>
 						
 						<li>
-						<ul class="nav navbar-nav navbar-right">
+						
 						<div id="suche">
 						<form class="navbar-form" role="search">
 						<div class="form-group">
@@ -162,9 +171,9 @@
 		
 		
 		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Hier sehen Sie die Jahresübersicht Ihrer Bewertungen </h4> </div>
-			  <div class="grafik-panel-body">
-				<div id="dash2">
+			  <div class="panel-heading"> <h4>Entwicklung des Stimmungsbildes im Jahresverlauf</h4> </div>
+			    <div class="grafik-panel-body">
+				<div class="container" id="line"> </div>
 				<svg id="visualisation"  width="1050" height="470"></svg>
 				</div>
 			  </div>
@@ -194,8 +203,12 @@
 
 
 // Set the dimensions of the canvas / graph
-var	margin = {top: 60, right: 20, bottom: 30, left: 50},
-	width = 800 - margin.left - margin.right,
+
+
+
+// Set the dimensions of the canvas / graph
+var	margin = {top: 80, right: 20, bottom: 30, left: 150},
+	width = 850 - margin.left - margin.right,
 	height = 400 - margin.top - margin.bottom;
 
 // Parse the date / time
@@ -239,16 +252,17 @@ var	svg = d3.select("#visualisation")
 		      "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.json("LineChartData.json", function(error, data) {
+d3.json("http://134.91.18.177:5000/line_neu", function(error, data) {
 	data.forEach(function(d) {
 		d.monat = parseDate(d.monat);
 		d.anzahlPos = +d.anzahlPos;
 		d.anzahlNeg = +d.anzahlNeg;
 	});
 
+
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.monat; }));
-	y.domain([0, d3.max(data, function(d) { return d.anzahlPos; })]);
+	y.domain([0, d3.max(data, function(d) { return d.anzahlNeg; })]);
 
 	// Add the valueline path.
 	svg.append("svg:path")		
@@ -321,6 +335,8 @@ d3.json("LineChartData.json", function(error, data) {
 		.call(yAxis);
 
 });
+
+
 	</script>
 						  
 						  

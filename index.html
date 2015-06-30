@@ -4,7 +4,7 @@
 	
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1, user-scalable=0">
 		<title>Healthcare Praxisprojekt</title>
 		<meta name="author" content="healthcare praxisprojekt">
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -221,6 +221,7 @@
 				<div class="col-md-6 col-sm-6">
 				
 				<button type="button" class="btn btn-info" data-toggle="collapse" data-parent="#accordion1" data-target="#bewertung" style="font-size: 14px; font-weight: bold;"> 
+				<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Gewichtete Verrechnung (nach jeweiligen Mengen) der Gesamtbewertung von Klinikbewertungen.de und Kliniken.de" data-original-title="" title=""></span>
 				<div id="headerBewertung"></div><span class="badge"></span> <b class="caret"></b>
 				</button> 
 				
@@ -231,6 +232,7 @@
 				</div>
 				
 				<button type="button" class="btn btn-info" data-toggle="collapse" data-parent="#accordion1" data-target="#weiterempfehlung" style="font-size: 14px; font-weight:bold;"> 
+				 <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Gewichtete Verrechnung (nach jeweiligen Mengen) der Weiterempfehlungsrate von Klinikenbewertungen.de und Weisse-Liste.de" data-original-title="" title=""></span> 
 				 <div id="headerWeiterempfehlung"></div><span class="badge"></span> <b class="caret"></b>
 				</button> 
 				
@@ -470,41 +472,46 @@ legendDonut.append("text")
 
 
 //Wordcloud
-   
 d3.json("http://134.91.18.177:5000/worthaeufigkeit_kh1", function(error, data) {	
+		
+	var width = $("#dash2").width();
 	
-		 var color = d3.scale.linear()
-            var color = d3.scale.linear()
-            .domain([0,1,2,3,4,5,6,10,15,20,100])
-			.range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+    var color = d3.scale.linear()
+            .domain([0,1,2,4,6,10,15,20,100])
 			
-		d3.layout.cloud().size([450, 350])
-				.words(data)
-				.rotate(0)
-				.fontSize(function(d) { return d.haeufigkeit + 15; })
-				.on("end", draw)
-				.start();
+			.range(["#B23FA6", "#4BF1EE", "#F0E10D", "#F02525", "#F00D0D", "#1CF00D", "#1CF00D", "#F0680D", "#150DF0"]);
+			
+	d3.layout.cloud().size([width, 100])
+			.words(data)
+			.rotate(0)
+			.fontSize(function(d) { return Math.sqrt(d.haeufigkeit); })
+			.on("end", draw)
+			.start();
 
-		function draw(words) {
-			d3.select("#dash2").append("svg")
-					.attr("width", 500)
-					.attr("height", 220)
-					.attr("class", "wordcloud")
-					.append("g")
-					// without the transform, words would get cutoff to the left and top, they would
-					// appear outside of the SVG area
-					.attr("transform", "translate(100,130)")
-					.selectAll("text")
-					.data(words)
-					.enter().append("text")
-					.style("font-size", function(d) { return d.haeufigkeit + "px"; })
-					.style("fill", function(d, i) { return color(i); })
-					.attr("transform", function(d) {
-						return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-					})
-					.text(function(d) { return d.wort; });
-		}
-	});	
+	function draw(words) {
+		d3.select("#dash2").append("svg")
+				.attr("width", width)
+				.attr("height", 220)
+				.attr("class", "wordcloud")
+				.append("g")
+				// without the transform, words would get cutoff to the left and top, they would
+				// appear outside of the SVG area
+				.attr("transform", "translate(" + width / 2 + ",100)")
+				.selectAll("text")
+				.data(words)
+				.enter().append("text")
+				.style("font-size", function(d) {
+					if(d.haeufigkeit >= 20) return d.haeufigkeit / 2 + "px";
+					else return "10px";
+				})
+				.style("fill", function(d, i) { return color(i); })
+				.attr("transform", function(d) {
+					return "translate(" + [d.x, d.y*3] + ")rotate(" + d.rotate + ")";
+				})
+				.attr("text-anchor", "middle")
+				.text(function(d) { return d.wort; });
+	}
+});
 	
 	
 d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {

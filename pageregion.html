@@ -14,7 +14,7 @@
 		<script src="d3.min.js"></script> 
 		<script src="http://d3js.org/d3.v3.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<!--<link href="d3.css" rel="stylesheet">-->
+		<link href="d3.css" rel="stylesheet">
 		<link href="styles.css" rel="stylesheet">
 		<script src="d3.layout.cloud.js"></script>
 		
@@ -24,10 +24,7 @@
 		<script src="jquery.mobile-1.4.5.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
 		
-	
-		
-	</head>
-<style>
+		<style>
 
 path { 
 	
@@ -59,12 +56,16 @@ div.tooltip {
 	
 }
 </style>	
+	
+		
+	</head>
+	
 <body>
 
 <div id="wrapper">
 <!-- Navigation -->
 
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
 			<!-- optional: HealthCare -->
             </div>
@@ -114,7 +115,7 @@ div.tooltip {
 									</td>
 								</tr>	
                                 <tr>
-                                    <td>
+                                    <td >
                                         <a href="pagetragerschaft.html" target="_self">Trägerschaft Intern</a>
                                     </td>
                                 </tr>
@@ -190,21 +191,35 @@ div.tooltip {
 			
 <!-- Inhalt -->
 
-      <div id="page-wrapper>
-          
+      <div id="page-wrapper">
+			
 		<!-- obere Hälfte --> 
 		<div class="row">
-		   <div class="col-lg-12">
-		   
-		   <br>
-		   
-		   <div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Hier sehen Sie Ihre Klinik im Vergleich zu den anderen Ihrer Region </h4> </div>
+		<div class="col-md-12">
+		
+		
+		<div class="panel panel-default">
+			 <div class="panel-heading"> <h4> Hier sehen Sie Ihre Klinik im Vergleich zu den anderen Ihrer Region <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Alle teilnehmenden Krankenhäuser in der selben Stadt und Nähe in der Gesamtzufriedenheit verglichen"></span></h4> </div>
 			  <div class="grafik-panel-body">
 				<div class="container" id="balken"> </div>
-			  
-		   
-		<script>
+			  </div>
+			</div>
+		
+		
+		
+		</div>
+                </div> <!-- Ende row -->
+
+		
+			</div> <!-- Ende Page-Wrapper -->
+
+       
+		
+		<!-- /#wrapper -->
+		</div>
+ 
+    
+<script>
 		
 		var margin = {top: 20, right: 20, bottom: 100, left: 75},
 		    width = 800 - margin.left - margin.right,
@@ -301,26 +316,9 @@ div.tooltip {
 		}
 		//http://bl.ocks.org/mbostock/3885304
 		</script>
-	</div>
-			</div>
+						  
+						  
 
-				
-			</div>
-			
-			</div>
-
-		</div> <!-- Ende row-->
-					
-				<!-- untere Hälfte --> 
-			
-			</div> <!-- Ende Page-Wrapper -->
-
-       
-		
-		<!-- /#wrapper -->
-		</div>
- 
- 
 
   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -344,6 +342,25 @@ div.tooltip {
     });
 });
 
+	<!-- Zum Öffnen und Schließen Accordion Bewertung und Empfehlung -->
+	$('#accordion1 .collapse').on('show.bs.collapse', function () {
+  $('#accordion1 .collapse.in').collapse('hide');
+});
+
+<!-- für Popover für mehr Infos-->
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('body').on('click', function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
 	</script>
 </body>
 </html>

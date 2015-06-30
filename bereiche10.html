@@ -24,38 +24,6 @@
 		<script src="jquery.mobile-1.4.5.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
 		
-		<style>
-
-path { 
-	
-	stroke-width: 2;
-	fill: none;
-}
-
-
-.axis path,
-.axis line {
-	fill: none;
-	stroke: grey;
-	stroke-width: 1;
-	shape-rendering: crispEdges;
-}
-
-
-div.tooltip {
-  position: absolute;	
-  text-align: center;	
-  width: 70px;	
-  height: 45px;		
-  padding: 2px;	
-  font: 12px sans-serif;	
-  background: lightgrey;	
-  border: 0px;					
-  border-radius: 8px;
- 
-	
-}
-</style>	
 	
 		
 	</head>
@@ -65,7 +33,7 @@ div.tooltip {
 <div id="wrapper">
 <!-- Navigation -->
 
-				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
 			<!-- optional: HealthCare -->
             </div>
@@ -76,7 +44,7 @@ div.tooltip {
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-home">
-                            </span><a href="index.html" target="_self">Dashboard</a></a>
+                            </span><a href="id10.html" target="_self">Dashboard</a></a>
                         </h4>
                     </div>
 				</div>
@@ -85,7 +53,7 @@ div.tooltip {
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-comment">
-                            </span><a href="pagealle.html" target="_self">Kommentare</a></a>
+                            </span><a href="pagealle10.html" target="_self">Kommentare</a></a>
                         </h4>
                     </div>
 				</div>
@@ -94,7 +62,7 @@ div.tooltip {
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-cloud">
-                            </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
+                            </span><a href="wordcloud10.html" target="_self">Wordcloud</a></a>
                         </h4>
                     </div>
                 </div>
@@ -106,46 +74,46 @@ div.tooltip {
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
-                    
+                    <div id="collapseFour" class="panel-collapse collapse">
                         <div class="accordion-panel-body">
                             <table class="table">
 								<tr>
-									<td>
-									    <a href="bereiche.html" target="_self">Einzelne Bereiche </a>
+									<td id="aktuell">
+									    <a href="bereiche10.html" target="_self">Einzelne Bereiche </a>
 									</td>
 								</tr>	
                                 <tr>
-                                    <td >
-                                        <a href="pagetragerschaft.html" target="_self">Trägerschaft Intern</a>
+                                    <td>
+                                        <a href="pagetragerschaft10.html" target="_self">Trägerschaft Intern</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td id="aktuell">
-                                        <a href="pageregion.html" target="_self">Region</a>
+                                    <td>
+                                        <a href="pageregion10.html" target="_self">Region</a>
                                     </td>
                                 </tr>
 								
 								<tr>
-                                    <td >
-                                        <a href="jahr.html" target="_self">Jahresübersicht</a>
+                                    <td>
+                                        <a href="jahr10.html" target="_self">Jahresübersicht</a>
                                     </td>
                                 </tr>
                                 <tr>
                                
                             </table>
                         </div>
-                    
+                    </div>
                 </div>
             </div>
                 </ul>
 				
-                       <ul class="nav navbar-nav navbar-user">
+                        <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kliniken der Stadt Köln GmbH Holweide  <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> <a style="color:#044C92; font-weight: bold;">Wahl des Krankenhauses </a> </li>
                             <li class="divider"></li>
-                            <li> <a href="id10.html" target="_self"> Kliniken der Stadt Köln GmbH Holweide <span class="badge"></span></a> </li>
+                            <li> <a href="index.html" target="_self"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span></a> </li>
                             <li class="divider"></li>
 							<li> <a href="idx.html"> Klinikum Dortmund GmbH <span class="bagde"></span></a></li>
                             <li class="divider"></li>
@@ -187,6 +155,7 @@ div.tooltip {
                 
             </div>
         </nav>
+ 
 
 			
 <!-- Inhalt -->
@@ -195,19 +164,21 @@ div.tooltip {
 			
 		<!-- obere Hälfte --> 
 		<div class="row">
+		
 		<div class="col-md-12">
 		
 		
 		<div class="panel panel-default">
-			 <div class="panel-heading"> <h4> Hier sehen Sie Ihre Klinik im Vergleich zu den anderen Ihrer Region <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Alle teilnehmenden Krankenhäuser in der selben Stadt und Nähe in der Gesamtzufriedenheit verglichen"></span></h4> </div>
+			  <div class="panel-heading"> <h4> Hier sehen Sie Ihre Bewertung für spezielle Bereiche <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Verwendung der Auswertungen von Kliniken.de und Klinikbewertungen.de"></span> </h4> </div>
 			  <div class="grafik-panel-body">
-				<div class="container" id="balken"> </div>
+				x
 			  </div>
 			</div>
 		
 		
 		
 		</div>
+				
                 </div> <!-- Ende row -->
 
 		
@@ -218,107 +189,6 @@ div.tooltip {
 		<!-- /#wrapper -->
 		</div>
  
-    
-<script>
-		
-		var margin = {top: 20, right: 20, bottom: 100, left: 75},
-		    width = 800 - margin.left - margin.right,
-		    height = 500 - margin.top - margin.bottom;
-			
-		
-
-		var x = d3.scale.ordinal()
-		    .rangeRoundBands([0, width], .5);
-
-		var y = d3.scale.linear()
-		    .range([height, 0]);
-
-		var xAxis = d3.svg.axis()
-		    .scale(x)
-		    .orient("bottom")
-			;
-			
-	/* EINGEFÜGT UNTEN: ODER um Beschriftung zu drehen: svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-65)" 
-                }); */
-
-		var yAxis = d3.svg.axis()
-		    .scale(y)
-		    .orient("left")
-		    .ticks(20);
-		
-		var svg = d3.select("div#balken").append("svg")
-		    .attr("width", width + margin.left + margin.right)
-		    .attr("height", height + margin.top + margin.bottom)
-		  .append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-			//.attr("fill", function(d, i) { return color(i); } );
-
-				d3.json("http://134.91.18.177:5000/diagramm_re", function(error, data) {
-		  x.domain(data.map(function(d) { return d.krankenhaus; }));
-		  y.domain([0, d3.max(data, function(d) { return d.rating_gesamt; })]); //einbindung des DatenArrays
-		  
-		  
-		
-
-		  svg.append("g")
-		      .attr("class", "x axis")
-		      .attr("transform", "translate(0," + height + ")")
-		      .call(xAxis)
-			  .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-15)" 
-                });
-
-		  svg.append("g")
-		      .attr("class", "y axis")
-		      .call(yAxis)
-		    .append("text")
-		      .attr("transform", "rotate(-90)")
-		      .attr("y", 6)
-		      .attr("dy", ".71em")
-		      .style("text-anchor", "end")
-		      .text("Bewertung in Prozent");
-
-		  svg.selectAll(".bar")
-		      .data(data)
-		    .enter().append("rect")
-		      .attr("class", "bar")
-		      .attr("x", function(d) { return x(d.krankenhaus); })
-		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.rating_gesamt); })
-		      .attr("height", function(d) { return height - y(d.rating_gesamt);})
-			  .attr("fill", function (d) {
-				if(d.rating_gesamt >=75) return "#00ff00";
-						else if (d.rating_gesamt >= 50) return "#B5B5B5";
-							else return "#EE0000";
-							});
-				
-			  
-                                       
-
-		});
-
-		function type(d) {
-		  d.rating_gesamt = +d.rating_gesamt;
-		  return d;
-		}
-		//http://bl.ocks.org/mbostock/3885304
-		</script>
-						  
-						  
-
 
   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -330,37 +200,37 @@ div.tooltip {
 
 	<!-- zum Verstecken von Inhalten -->
 	
-	$(document).ready(function(){
-    $(".btn-primary").click(function(){
-        $(".collapse").collapse('toggle');
-    });
-    $(".btn-success").click(function(){
-        $(".collapse").collapse('show');
-    });
-    $(".btn-warning").click(function(){
-        $(".collapse").collapse('hide');
-    });
-});
+			$(document).ready(function(){
+			$(".btn-primary").click(function(){
+				$(".collapse").collapse('toggle');
+			});
+			$(".btn-success").click(function(){
+				$(".collapse").collapse('show');
+			});
+			$(".btn-warning").click(function(){
+				$(".collapse").collapse('hide');
+			});
+		});
 
 	<!-- Zum Öffnen und Schließen Accordion Bewertung und Empfehlung -->
-	$('#accordion1 .collapse').on('show.bs.collapse', function () {
-  $('#accordion1 .collapse.in').collapse('hide');
-});
+		$('#accordion1 .collapse').on('show.bs.collapse', function () {
+		$('#accordion1 .collapse.in').collapse('hide');
+		});
 
 <!-- für Popover für mehr Infos-->
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
+	$(function () {
+	  $('[data-toggle="popover"]').popover()
+	})
 
-$('body').on('click', function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        //the 'is' for buttons that trigger popups
-        //the 'has' for icons within a button that triggers a popup
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-            $(this).popover('hide');
-        }
-    });
-});
+	$('body').on('click', function (e) {
+		$('[data-toggle="popover"]').each(function () {
+			//the 'is' for buttons that trigger popups
+			//the 'has' for icons within a button that triggers a popup
+			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+				$(this).popover('hide');
+			}
+		});
+	});
 	</script>
 </body>
 </html>

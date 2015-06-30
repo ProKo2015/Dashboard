@@ -14,9 +14,10 @@
 		<script src="d3.min.js"></script> 
 		<script src="http://d3js.org/d3.v3.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<link href="line.css" rel="stylesheet">
+		<link href="d3.css" rel="stylesheet">
 		<link href="styles.css" rel="stylesheet">
 		<script src="d3.layout.cloud.js"></script>
+		
 		
 		 <!-- JQuery-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,11 +26,9 @@
 		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
 		
 	
-	
+		
 	</head>
-
 	
-
 <body>
 
 <div id="wrapper">
@@ -41,7 +40,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" id="sidebar" class="collapse-in"">
-						<div class="panel-group" id="accordion">
+					<div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -76,7 +75,7 @@
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
-                    
+                    <div id="collapseFour" class="panel-collapse collapse">
                         <div class="accordion-panel-body">
                             <table class="table">
 								<tr>
@@ -96,7 +95,7 @@
                                 </tr>
 								
 								<tr>
-                                    <td id="aktuell">
+                                    <td>
                                         <a href="jahr.html" target="_self">Jahresübersicht</a>
                                     </td>
                                 </tr>
@@ -104,14 +103,14 @@
                                
                             </table>
                         </div>
-                    
+                    </div>
                 </div>
             </div>
-                </ul>            
+                </ul>
 				
-				           <ul class="nav navbar-nav navbar-user">
+                <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ausgewähltes KH <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> <a style="color:#044C92; font-weight: bold;">Wahl des Krankenhauses </a> </li>
                             <li class="divider"></li>
@@ -133,16 +132,16 @@
 						</ul>
 						
 						<ul class="nav navbar-nav navbar-right">
+						
 						<li>
 						<img src="Logo_HSMM.png" id="logo"> </img>
 						</li>
 						
 						<li>
-						
 						<div id="suche">
-						<form class="navbar-form" role="search">
+						<form class="navbar-form" role="search" action="file:///C:/Users/BG/Desktop/Dashboard/index.html" method="GET">
 						<div class="form-group">
-						<input type="text" class="form-control" placeholder="Suchen...">
+						<input type="text" name="q" class="form-control" placeholder="Suchen...">
 						</div>
 						</form> 
 						</div>
@@ -150,12 +149,7 @@
 						
 						</ul>
                    
-		
-		
-        
-
-				
-                
+		               
             </div>
         </nav>
  
@@ -167,23 +161,11 @@
 			
 		<!-- obere Hälfte --> 
 		<div class="row">
-		
 		<div class="col-md-12">
 		
-		
-		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4>Entwicklung des Stimmungsbildes im Jahresverlauf<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Anhand der gesammelten Monatsbewertungen der letzten 12 Monate, ab Beginn Social Media Monitoring"></span></h4> </div>
-			    <div class="grafik-panel-body">
-				<div class="container" id="line"> </div>
-				<svg id="visualisation"  width="1050" height="470"></svg>
-				</div>
-			  </div>
-			</div>
-		
-		
+		Inhalt folgt
 		
 		</div>
-				
                 </div> <!-- Ende row -->
 
 		
@@ -196,149 +178,264 @@
  
     
 
-	 <script>
+
+		
 	
+<script>
+//Collapsibles
+d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {
+
+//Gesamtbewertung Überschrift						
+						var bewertungenTop = d3.select("#headerBewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungenTop.append("text")
+							.text("Gesamtbewertung: ");
+						bewertungenTop.append("text")
+							.text(function(d) { return d.rating_gesamt; });
+						bewertungenTop.append("text")
+							.text(" %");
+							
+//Gesamtbewertung: Wert für Klinikbewertungen.de
+					
+						var bewertungen = d3.select("#bewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungen.append("text")
+							.text("Klinikbewertungen.de: \n");
+						bewertungen.append("text")
+							.text(function(d) { return d.rating_kb; });
+						bewertungen.append("text")
+							.text(" %");
+						
+//Gesamtbewertung: Wert für Kliniken.de						
+						var bewertungen2 = d3.select("#bewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungen2.append("text")
+							.text("Kliniken.de: ");
+						bewertungen2.append("text")
+							.text(function(d) { return d.rating_kl; });
+						bewertungen2.append("text")
+							.text(" %");
+							
+//Weiterempfehlungsrate Gesamtwert
+var weiterempfehlungTop = d3.select("#headerWeiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlungTop.append("text")
+							.text("Weiterempfehlungsrate: ");
+						weiterempfehlungTop.append("text")
+							.text(function(d) { return d.weiterempfehlung_gesamt; });
+						weiterempfehlungTop.append("text")
+							.text(" %");
+					
+						var weiterempfehlung = d3.select("#weiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlung.append("text")
+							.text("Klinikbewertungen.de: \n");
+						weiterempfehlung.append("text")
+							.text(function(d) { return d.weiterempfehlung_kb; });
+						weiterempfehlung.append("text")
+							.text(" %");
+						
+						
+						var weiterempfehlung2 = d3.select("#weiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlung2.append("text")
+							.text("Weisse-Liste.de: ");
+						weiterempfehlung2.append("text")
+							.text(function(d) { return d.weiterempfehlung_wl; });
+						weiterempfehlung2.append("text")
+							.text(" %");							
+					});
 	
-//Lalala Linien
-	
+// Mhhhhh Donut
+
+ var w = 250,
+	h = 250,
+	r = 100,
+	inner = 40,
+	color = d3.scale.ordinal()
+		.range([ "#40E140","#848484", "#CD0000"]);
+
+var total = 0;
 
 
-// Set the dimensions of the canvas / graph
 
+d3.json("http://134.91.18.177:5000/donut_kh1", function(error, data) {
+	  data.forEach(function(d) {
+		total += d.anzahl;
+	  });
+  
+dataObj = data;
+  
 
-
-// Set the dimensions of the canvas / graph
-var	margin = {top: 80, right: 20, bottom: 30, left: 150},
-	width = 850 - margin.left - margin.right,
-	height = 400 - margin.top - margin.bottom;
-
-// Parse the date / time
-var	parseDate = d3.time.format("%d-%b-%y").parse;
-var formatTime = d3.time.format("%e %B");// Format tooltip date / time
-
-// Set the ranges
-var	x = d3.time.scale().range([0, width]);
-var	y = d3.scale.linear().range([height, 0]);
-
-
-// Define the axes
-var	xAxis = d3.svg.axis().scale(x)
-	.orient("bottom").ticks(5);
-
-var	yAxis = d3.svg.axis().scale(y)
-	.orient("left").ticks(5);
-
-// Define the line
-var	valueline = d3.svg.line()
-	.x(function(d) { return x(d.monat); })
-	.y(function(d) { return y(d.anzahlPos); });
-
-var	valueline2 = d3.svg.line()
-	.x(function(d) { return x(d.monat); })
-	.y(function(d) { return y(d.anzahlNeg); });
-
-// Define 'div' for tooltips
-var div = d3.select("#visualisation")
-	.append("div")  // declare the tooltip div 
-	.attr("class", "tooltip")              // apply the 'tooltip' class
-	.style("opacity", 0);                  // set the opacity to nil
-
-// Adds the svg canvas
-var	svg = d3.select("#visualisation")
-	.append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
+var svg = d3.select("#dash1").append("svg")
+	.data(dataObj)
+		.attr("width", w)
+		.attr("height", h)
 	.append("g")
-		.attr("transform", 
-		      "translate(" + margin.left + "," + margin.top + ")");
-
-// Get the data
-d3.json("http://134.91.18.177:5000/line_neu", function(error, data) {
-	data.forEach(function(d) {
-		d.monat = parseDate(d.monat);
-		d.anzahlPos = +d.anzahlPos;
-		d.anzahlNeg = +d.anzahlNeg;
-	});
+		.attr("transform", "translate(" + r * 1.1 + "," + r * 1.1 + ")")
 
 
-	// Scale the range of the data
-	x.domain(d3.extent(data, function(d) { return d.monat; }));
-	y.domain([0, d3.max(data, function(d) { return d.anzahlNeg; })]);
 
-	// Add the valueline path.
-	svg.append("svg:path")		
-		.attr("d", valueline(data))
-		.attr("stroke", "green")
-		.attr("stroke-width", 2);
-	
-	svg.append("path")		
-		.attr("d", valueline2(data))
-		.attr("stroke", "red")
-		.attr("stroke-width", 2);
+var textTop = svg.append("text")
+	.attr("dy", ".35em")
+	.style("text-anchor", "middle")
+	.attr("class", "textTop")
+	.text("TOTAL")
+	.attr("y", -10),
+textBottom = svg.append("text")
+	.attr("dy", ".35em")
+	.style("text-anchor", "middle")
+	.attr("class", "textBottom")
+	.text(total)
+	.attr("y", 10);
 
-	// draw the scatterplot
-	svg.selectAll("dot")									
-		.data(data)											
-	.enter().append("circle")								
-		.attr("r", 5)	
-		.attr("cx", function(d) { return x(d.monat); })		 
-		.attr("cy", function(d) { return y(d.anzahlPos); })
-	// Tooltip stuff after this
-	    .on("mouseover", function(d) {		
-            div.transition()
-				.duration(500)	
-				.style("opacity", 0);
-			div.transition()
-				.duration(200)	
-				.style("opacity", .9);	
-			div.html(                      
-				"positive Kommentare: "  + d.anzahlPos)	 
-				.style("left", (d3.event.pageX) + "px")			 
-				.style("top", (d3.event.pageY - 50) + "px");
+var arc = d3.svg.arc()
+	.innerRadius(inner)
+	.outerRadius(r);
+
+var arcOver = d3.svg.arc()
+	.innerRadius(inner + 7)
+	.outerRadius(r + 7);
+
+	var pie = d3.layout.pie()
+		.sort(null)
+		.value(function(d) { return d.anzahl; });
+
+var arcs = svg.selectAll(".arc")
+	.data(pie(dataObj))
+	.enter()
+		.append("g")
+			.attr("class", "arc")
+			.on("mouseover", function(d) {
+				d3.select(this).select("path").transition()
+					.duration(300)
+					.attr("d", arcOver)
+			
+				textTop.text(d3.select(this).datum().data.wertung)
+					.attr("y", -10);
+				textBottom.text(d3.select(this).datum().data.anzahl)
+					.attr("y", 10);
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).select("path").transition()
 					.duration(200)
 					.attr("d", arc);
 			
-				});
-
-	
-	svg.selectAll("dot")									
-		.data(data)											
-	.enter().append("circle")								
-		.attr("r", 5)	
-		.attr("cx", function(d) { return x(d.monat); })		 
-		.attr("cy", function(d) { return y(d.anzahlNeg); })
-	// Tooltip stuff after this
-	    .on("mouseover", function(d) {		
-            div.transition()
-				.duration(500)	
-				.style("opacity", 0);
-			div.transition()
-				.duration(200)	
-				.style("opacity", .9);	
-			div	.html(
-				"negative Kommentare: "  + d.anzahlNeg)	 
-				.style("left", (d3.event.pageX) + "px")			 
-				.style("top", (d3.event.pageY - 20) + "px");
+				textTop.text( "TOTAL" )
+					.attr("y", -10);
+				textBottom.text(total);
 			});
 
-	// Add the X Axis
-	svg.append("g")	
-		.attr("class", "x axis")
-		.attr("transform", "translate(0," + height + ")")
-		.call(xAxis);
+arcs.append("path")
+	.attr("fill", function(d, i) { return color(i); } )
+	.attr("d", arc);
 
-	// Add the Y Axis
-	svg.append("g")	
-		.attr("class", "y axis")
-		.call(yAxis);
+var legendDonut = d3.select("#dash1").append("svg")
+	.attr("class", "legend")
+	.attr("width", r)
+	.attr("height", r * 2) <!-- passt sich beim löschen der beiden Zeilen (obere) an --> 
+	.selectAll("g")
+	.data(dataObj)
+	.enter().append("g")
+	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-});
+legendDonut.append("rect")
+	.attr("width", 18)
+	.attr("height", 18)
+	.style("fill", function(d, i) { return color(i); });
+
+legendDonut.append("text")
+	.attr("x", 24)
+	.attr("y", 9)
+	.attr("dy", ".35em")
+	.text(function(d) { return d.wertung; });
+	});
 
 
-	</script>
+
+//Wordcloud
+   
+d3.json("http://134.91.18.177:5000/worthaeufigkeit_kh1", function(error, data) {	
+	
+		 var color = d3.scale.linear()
+            var color = d3.scale.linear()
+            .domain([0,1,2,3,4,5,6,10,15,20,100])
+			.range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+			
+		d3.layout.cloud().size([450, 350])
+				.words(data)
+				.rotate(0)
+				.fontSize(function(d) { return d.haeufigkeit + 15; })
+				.on("end", draw)
+				.start();
+
+		function draw(words) {
+			d3.select("#dash2").append("svg")
+					.attr("width", 500)
+					.attr("height", 220)
+					.attr("class", "wordcloud")
+					.append("g")
+					// without the transform, words would get cutoff to the left and top, they would
+					// appear outside of the SVG area
+					.attr("transform", "translate(100,130)")
+					.selectAll("text")
+					.data(words)
+					.enter().append("text")
+					.style("font-size", function(d) { return d.haeufigkeit + "px"; })
+					.style("fill", function(d, i) { return color(i); })
+					.attr("transform", function(d) {
+						return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+					})
+					.text(function(d) { return d.wort; });
+		}
+	});	
+	
+	
+d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {
+						
+						var comments1 = d3.select("#wertKliniken.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+
+						comments1.append("text")
+							.text(function(d) { return d.rating_kb; });
+							
+						var comments2 = d3.select("#wertKlinikbewertungen.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						comments2.append("text")
+							.text(function(d) { return d.rating_kl; });
+					});
+</script>
+
 						  
 						  
 

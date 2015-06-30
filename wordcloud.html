@@ -149,6 +149,8 @@
                 
             </div>
         </nav>
+ 
+
 			
 <!-- Inhalt -->
 
@@ -156,20 +158,21 @@
 			
 		<!-- obere Hälfte --> 
 		<div class="row">
-		<div class="col-md-12">
-		
-		
-		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Durchschnittliche Bewertung Ihrer Klinik im Vergleich zu anderen Ihrer Trägerschaft  <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Ihre durchschnittliche Gesamtbewertung im Vergleich zu den Bewertungen der anderen Krankenhäuser Ihrer Trägerschaft"></span>  </h4> </div>
-			  <div class="grafik-panel-body">
-				<div class="container" id="balken"> </div>
-			  </div>
-			</div>
-		
-		
-		
-		</div>
-                </div> <!-- Ende row -->
+				<div class="col-md-12 col-sm-12">
+				
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+					Hier sehen Sie die Wörter, die im letzten Monat am häufigsten erwähnt wurden<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Worthäufigkeitsanalyse der Kommentare von Klinikbewertungen.de und Kliniken.de"></span>
+					</div>
+				  <div class="cloud-panel-body">
+						<div id="dash2">
+				  </div>
+				</div>
+				</div>
+				
+				</div>
+				
+        </div> <!-- Ende row -->
 
 		
 			</div> <!-- Ende Page-Wrapper -->
@@ -179,105 +182,73 @@
 		<!-- /#wrapper -->
 		</div>
  
-    
+ <script>
 
-		<script>
+//Wordcloud
+d3.json("http://134.91.18.177:5000/worthaeufigkeit_kh1", function(error, data) {	
 		
-		var margin = {top: 20, right: 0, bottom: 100, left: 160},
-		    width = 800 - margin.left - margin.right,
-		    height = 500 - margin.top - margin.bottom;
+	var width = $("#dash2").width();
+	
+    var color = d3.scale.linear()
+            .domain([0,1,2,4,6,10,15,20,100])
 			
-		
-
-		var x = d3.scale.ordinal()
-		    .rangeRoundBands([0, width], .5);
-
-		var y = d3.scale.linear()
-		    .range([height, 0]);
-
-		var xAxis = d3.svg.axis()
-		    .scale(x)
-		    .orient("bottom")
-			;
+			.range(["#B23FA6", "#4BF1EE", "#F0E10D", "#F02525", "#F00D0D", "#1CF00D", "#1CF00D", "#F0680D", "#150DF0"]);
 			
-	/* EINGEFÜGT UNTEN: ODER um Beschriftung zu drehen: svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-65)" 
-                }); */
+	d3.layout.cloud().size([width, 100])
+			.words(data)
+			.rotate(0)
+			.fontSize(function(d) { return Math.sqrt(d.haeufigkeit); })
+			.on("end", draw)
+			.start();
 
-		var yAxis = d3.svg.axis()
-		    .scale(y)
-		    .orient("left")
-		    .ticks(20);
-		
-		var svg = d3.select("div#balken").append("svg")
-		    .attr("width", width + margin.left + margin.right + 200)
-		    .attr("height", height + margin.top + margin.bottom)
-		  .append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-			//.attr("fill", function(d, i) { return color(i); } );
+	function draw(words) {
+		d3.select("#dash2").append("svg")
+				.attr("width", width)
+				.attr("height", 220)
+				.attr("class", "wordcloud")
+				.append("g")
+				// without the transform, words would get cutoff to the left and top, they would
+				// appear outside of the SVG area
+				.attr("transform", "translate(" + width / 2 + ",100)")
+				.selectAll("text")
+				.data(words)
+				.enter().append("text")
+				.style("font-size", function(d) {
+					if(d.haeufigkeit >= 20) return d.haeufigkeit / 2 + "px";
+					else return "10px";
+				})
+				.style("fill", function(d, i) { return color(i); })
+				.attr("transform", function(d) {
+					return "translate(" + [d.x, d.y*3] + ")rotate(" + d.rotate + ")";
+				})
+				.attr("text-anchor", "middle")
+				.text(function(d) { return d.wort; });
+	}
+});
+	
+	
+d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {
+						
+						var comments1 = d3.select("#wertKliniken.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
 
-				d3.json("http://134.91.18.177:5000/diagramm_tr_kh1", function(error, data) {
-		  x.domain(data.map(function(d) { return d.krankenhaus; }));
-		  y.domain([0, d3.max(data, function(d) { return d.rating_gesamt; })]); //einbindung des DatenArrays
-		  
-		  
-		
+						comments1.append("text")
+							.text(function(d) { return d.rating_kb; });
+							
+						var comments2 = d3.select("#wertKlinikbewertungen.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						comments2.append("text")
+							.text(function(d) { return d.rating_kl; });
+					});
+</script> 
 
-		  svg.append("g")
-		      .attr("class", "x axis")
-		      .attr("transform", "translate(0," + height + ")")
-		      .call(xAxis)
-			  .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-15)" 
-                });
 
-		  svg.append("g")
-		      .attr("class", "y axis")
-		      .call(yAxis)
-		    .append("text")
-		      .attr("transform", "rotate(-90)")
-		      .attr("y", 6)
-		      .attr("dy", ".71em")
-		      .style("text-anchor", "end")
-		      .text("Bewertung in Prozent");
-
-		  svg.selectAll(".bar")
-		      .data(data)
-		    .enter().append("rect")
-		      .attr("class", "bar")
-		      .attr("x", function(d) { return x(d.krankenhaus); })
-		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.rating_gesamt); })
-		      .attr("height", function(d) { return height - y(d.rating_gesamt);})
-			  .attr("fill", function (d) {
-				if(d.rating_gesamt >=75) return "#00ff00";
-						else if (d.rating_gesamt >= 50) return "#B5B5B5";
-							else return "#EE0000";
-							});
-				
-			  
-                                       
-
-		});
-
-		function type(d) {
-		  d.rating_gesamt = +d.rating_gesamt;
-		  return d;
-		}
-		//http://bl.ocks.org/mbostock/3885304
-		</script>
 						  
 						  
 

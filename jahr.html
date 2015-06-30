@@ -25,7 +25,7 @@
 		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.min.css" />
 		
 	
-	
+		
 	</head>
 	
 <body>
@@ -39,7 +39,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" id="sidebar" class="collapse-in"">
-					<div class="panel-group" id="accordion">
+						<div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -48,38 +48,25 @@
                         </h4>
                     </div>
 				</div>
-                <div class="panel panel-default">
+				
+				<div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-comment">
-                            </span>Kommentare<span class="caret"></span></a>
+                            </span><a href="pagealle.html" target="_self">Kommentare</a></a>
                         </h4>
                     </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="accordion-panel-body">
-                            <table class="table">
-							<tbody>
-                                <tr>
-                                    <td>
-                                        <a href="pagealle.html" target="_self">Alle</a>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="pagepositive.html" target="_self">Positive</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="pagenegative.html" target="_self">Negative</a>
-                                    </td>
-                                </tr>
-								</tbody>
-                            </table>
-                        </div>
+				</div>
+				
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-comment">
+                            </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
+                        </h4>
                     </div>
                 </div>
+				
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -87,7 +74,7 @@
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
-                    <div id="collapseFour" class="panel-collapse collapse">
+                
                         <div class="accordion-panel-body">
                             <table class="table">
 								<tr>
@@ -95,9 +82,8 @@
 									    <a href="bereiche.html" target="_self">Einzelne Bereiche </a>
 									</td>
 								</tr>	
-							
                                 <tr>
-                                    <td>
+                                    <td id="aktuell">
                                         <a href="pagetragerschaft.html" target="_self">Trägerschaft Intern</a>
                                     </td>
                                 </tr>
@@ -116,14 +102,14 @@
                                
                             </table>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
                 </ul>
 				
                 <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Gewähltes Krankenhaus <span class="badge"></span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
                             <li class="divider"></li>
@@ -137,12 +123,13 @@
 						</li>
 						</ul>
 						
+						<ul class="nav navbar-nav navbar-right">
+						
 						<li>
 						<img src="Logo_HSMM.png" id="logo"> </img>
 						</li>
 						
 						<li>
-						<ul class="nav navbar-nav navbar-right">
 						<div id="suche">
 						<form class="navbar-form" role="search">
 						<div class="form-group">
@@ -176,9 +163,9 @@
 		
 		
 		<div class="panel panel-default">
-			  <div class="panel-heading"> <h4> Hier sehen Sie die Jahresübersicht Ihrer Bewertungen </h4> </div>
-			  <div class="grafik-panel-body">
-				<div id="dash2">
+			  <div class="panel-heading"> <h4>Entwicklung des Stimmungsbildes im Jahresverlauf  <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Übersicht über die Anzahl der abgegebenen positiven und negativen Kommentare im Jahresverlauf (basierend auf der Sentimentanalyse)"></span> </h4> </div>
+			    <div class="grafik-panel-body">
+				<div class="container" id="line"> </div>
 				<svg id="visualisation"  width="1050" height="470"></svg>
 				</div>
 			  </div>
@@ -208,8 +195,12 @@
 
 
 // Set the dimensions of the canvas / graph
-var	margin = {top: 60, right: 20, bottom: 30, left: 50},
-	width = 800 - margin.left - margin.right,
+
+
+
+// Set the dimensions of the canvas / graph
+var	margin = {top: 80, right: 20, bottom: 30, left: 150},
+	width = 850 - margin.left - margin.right,
 	height = 400 - margin.top - margin.bottom;
 
 // Parse the date / time
@@ -253,16 +244,17 @@ var	svg = d3.select("#visualisation")
 		      "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.json("LineChartData.json", function(error, data) {
+d3.json("http://134.91.18.177:5000/line_kh1", function(error, data) {
 	data.forEach(function(d) {
 		d.monat = parseDate(d.monat);
 		d.anzahlPos = +d.anzahlPos;
 		d.anzahlNeg = +d.anzahlNeg;
 	});
 
+
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.monat; }));
-	y.domain([0, d3.max(data, function(d) { return d.anzahlPos; })]);
+	y.domain([0, d3.max(data, function(d) { return d.anzahlNeg; })]);
 
 	// Add the valueline path.
 	svg.append("svg:path")		
@@ -323,6 +315,11 @@ d3.json("LineChartData.json", function(error, data) {
 				.style("top", (d3.event.pageY - 20) + "px");
 			});
 
+	svg.append("text")      
+        .attr("x", 15)
+        .attr("y", -30 )
+        .style("text-anchor", "middle")
+        .text("Anzahl der \n Bewertungen");
 	// Add the X Axis
 	svg.append("g")	
 		.attr("class", "x axis")
@@ -335,6 +332,8 @@ d3.json("LineChartData.json", function(error, data) {
 		.call(yAxis);
 
 });
+
+
 	</script>
 						  
 						  

@@ -3,14 +3,22 @@
 .grey {
   background: #E6E6E6;
   height: 220px;
-  padding-left: 80px;
   
+  padding-left: 80px;
   margin-bottom: 10px; 
+  
+}
+.greyCloud {
+  background: #ffffff;
+  height: 220px;
+  
+  
+  
+ 
   
 }
 
 
-/* Textcloud */
 
 /*.legend {
         border: 1px solid #555555;
@@ -19,11 +27,15 @@
         margin: 10px;
         padding: 8px;
     }
+.bld {
+	font-weight: bold;
+}
    
 */
 /* Line ChartNEU*/
 
-.line path { 
+/*
+path { 
 	
 	stroke-width: 2;
 	fill: none;
@@ -49,9 +61,9 @@ div.tooltip {
   background: lightgrey;	
   border: 0px;					
   border-radius: 8px;
- /*  pointer-events: none;	This line needs to be removed */
+ 
 	
-}
+}*/
 
 
 /* Säulendiagramm */
@@ -109,7 +121,6 @@ div.tooltip {
 .legendDonut {
 	font-size: 18pt;
 }
-
 
 /*Kurven*/
 /*

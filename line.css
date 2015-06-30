@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+=======
+/* Für die Graphen */
+
+.grey {
+  background: #E6E6E6;
+  height: 220px;
+  
+  padding-left: 80px;
+  margin-bottom: 10px; 
+  
+}
+
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 path { 
 	
 	stroke-width: 2;

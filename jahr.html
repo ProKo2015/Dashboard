@@ -14,7 +14,7 @@
 		<script src="d3.min.js"></script> 
 		<script src="http://d3js.org/d3.v3.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<link href="d3.css" rel="stylesheet">
+		<link href="line.css" rel="stylesheet">
 		<link href="styles.css" rel="stylesheet">
 		<script src="d3.layout.cloud.js"></script>
 		
@@ -27,7 +27,9 @@
 	
 		
 	</head>
+
 	
+
 <body>
 
 <div id="wrapper">
@@ -61,7 +63,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
+<<<<<<< HEAD
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-comment">
+=======
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-cloud">
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
                             </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
                         </h4>
                     </div>
@@ -74,7 +80,11 @@
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
+<<<<<<< HEAD
                 
+=======
+                    
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
                         <div class="accordion-panel-body">
                             <table class="table">
 								<tr>
@@ -94,7 +104,7 @@
                                 </tr>
 								
 								<tr>
-                                    <td>
+                                    <td id="aktuell">
                                         <a href="jahr.html" target="_self">Jahresübersicht</a>
                                     </td>
                                 </tr>
@@ -105,31 +115,49 @@
                     
                 </div>
             </div>
-                </ul>
+                </ul>            
 				
-                <ul class="nav navbar-nav navbar-user">
+				           <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
+<<<<<<< HEAD
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
+=======
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
                         <ul class="dropdown-menu">
-						    <li> Wahl des Krankenhauses <span class="badge"></span></li>
+						    <li> <a style="color:#044C92; font-weight: bold;">Wahl des Krankenhauses </a> </li>
                             <li class="divider"></li>
-                            <li> <a href="uniklinikum.html"> Uniklinikum Essen <span class="badge"></span></a> </li>
+                            <li> <a href="id10.html" target="_self"> Kliniken der Stadt Köln GmbH Holweide <span class="badge"></span></a> </li>
                             <li class="divider"></li>
-							<li> <a href="#"> Marienhospital Gelsenkirchen <span class="bagde"></span></a></li>
+							<li> <a href="idx.html"> Klinikum Dortmund GmbH <span class="bagde"></span></a></li>
                             <li class="divider"></li>
-                            <li><a href="#"> St. Anna Hospital Herne <span class="badge"></span></a></li>
+                            <li><a href="idx.html"> St. Josef Krankenhaus GmbH<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="idx.html"> Alexianer Krefeld GmbH Maria-Hilf<span class="badge"></span></a></li>
+							    <li class="divider"></li>
+                            <li><a href="idx.html"> Katholisches Klinikum Essen Philippusstift<span class="badge"></span></a></li>
+							 <li class="divider"></li>
+                            <li><a style="color:#044C92;" href="startseite.html" target="_self"> Zurück zur Startseite<span class="badge"></span></a></li>
+							
                         </ul>
 		
 						</li>
 						</ul>
 						
 						<ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
 						
+=======
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 						<li>
 						<img src="Logo_HSMM.png" id="logo"> </img>
 						</li>
 						
 						<li>
+<<<<<<< HEAD
+=======
+						
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 						<div id="suche">
 						<form class="navbar-form" role="search">
 						<div class="form-group">
@@ -159,11 +187,15 @@
 		<!-- obere Hälfte --> 
 		<div class="row">
 		
-		<div class="col-md-12">
+		<div class="col-md-12 col-sm-12">
 		
 		
 		<div class="panel panel-default">
+<<<<<<< HEAD
 			  <div class="panel-heading"> <h4>Entwicklung des Stimmungsbildes im Jahresverlauf  <span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Übersicht über die Anzahl der abgegebenen positiven und negativen Kommentare im Jahresverlauf (basierend auf der Sentimentanalyse)"></span> </h4> </div>
+=======
+			  <div class="panel-heading"> <h4>Entwicklung des Stimmungsbildes im Jahresverlauf<span class="glyphicon glyphicon-info-sign pull-right" data-toggle="popover" data-placement="bottom" data-content="Sie finden eine Übersicht über die Anzahl der jeweils abgegebenen positiven und negativen Kommentare im Jahresverlauf"></span></h4> </div>
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 			    <div class="grafik-panel-body">
 				<div class="container" id="line"> </div>
 				<svg id="visualisation"  width="1050" height="470"></svg>
@@ -244,7 +276,11 @@ var	svg = d3.select("#visualisation")
 		      "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
+<<<<<<< HEAD
 d3.json("http://134.91.18.177:5000/line_kh1", function(error, data) {
+=======
+d3.json("http://134.91.18.177:5000/line_neu", function(error, data) {
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 	data.forEach(function(d) {
 		d.monat = parseDate(d.monat);
 		d.anzahlPos = +d.anzahlPos;

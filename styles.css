@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 
+=======
+.glyphicon {
+	float: left; 
+}
+
+.cloud-panel-body {
+	height: 450px;
+	text-align: center;
+	background-color: #E6E6E6;
+ }
+>>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
 
 /* Im Accordionmenü */
 #aktuell {
@@ -126,6 +138,7 @@ body {
 	height: 30px; 
 	text-align: center; 
 	font-size: 14px; 
+	
 	padding-bottom: 4%;
 	font-weight: bold; 
 }
@@ -487,5 +500,3 @@ a:focus {
 	background-color: #022f5a;
   }
 
- 
- 

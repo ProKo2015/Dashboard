@@ -18,6 +18,7 @@
 		<link href="styles.css" rel="stylesheet">
 		<script src="d3.layout.cloud.js"></script>
 		
+		
 		 <!-- JQuery-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="jquery-2.1.4.min.js"></script>
@@ -39,7 +40,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" id="sidebar" class="collapse-in"">
-						<div class="panel-group" id="accordion">
+					<div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -61,11 +62,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-<<<<<<< HEAD
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-comment">
-=======
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-cloud">
->>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
                             </span><a href="wordcloud.html" target="_self">Wordcloud</a></a>
                         </h4>
                     </div>
@@ -78,7 +75,7 @@
                             </span>Vergleiche<span class="caret"></span></a>
                         </h4>
                     </div>
-                
+                    <div id="collapseFour" class="panel-collapse collapse">
                         <div class="accordion-panel-body">
                             <table class="table">
 								<tr>
@@ -87,7 +84,7 @@
 									</td>
 								</tr>	
                                 <tr>
-                                    <td id="aktuell">
+                                    <td>
                                         <a href="pagetragerschaft.html" target="_self">Trägerschaft Intern</a>
                                     </td>
                                 </tr>
@@ -106,18 +103,14 @@
                                
                             </table>
                         </div>
-                    
+                    </div>
                 </div>
             </div>
                 </ul>
 				
-                              <ul class="nav navbar-nav navbar-user">
+                <ul class="nav navbar-nav navbar-user">
 						<li class="dropdown">
-<<<<<<< HEAD
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
-=======
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> St. Martinus-Krankenhaus Düsseldorf <span class="badge"></span> <b class="caret"></b></a>
->>>>>>> c39efebb07fa3f715281122758ff405aa4ca9492
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ausgewähltes KH <span class="badge"></span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 						    <li> <a style="color:#044C92; font-weight: bold;">Wahl des Krankenhauses </a> </li>
                             <li class="divider"></li>
@@ -146,9 +139,9 @@
 						
 						<li>
 						<div id="suche">
-						<form class="navbar-form" role="search">
+						<form class="navbar-form" role="search" action="file:///C:/Users/BG/Desktop/Dashboard/index.html" method="GET">
 						<div class="form-group">
-						<input type="text" class="form-control" placeholder="Suchen...">
+						<input type="text" name="q" class="form-control" placeholder="Suchen...">
 						</div>
 						</form> 
 						</div>
@@ -156,12 +149,7 @@
 						
 						</ul>
                    
-		
-		
-        
-
-				
-                
+		               
             </div>
         </nav>
  
@@ -173,117 +161,12 @@
 			
 		<!-- obere Hälfte --> 
 		<div class="row">
-		<div class="col-md-12 col-sm-12">
-		   
-		<h4> Übersicht aller Kommentare </h4>
+		<div class="col-md-12">
+		
+		Inhalt folgt
+		
 		</div>
-		</div>
-		<div class= "row">
-		<div class ="col-md-4">
-		<div class="panel panel-success" >
-            <div class="panel-heading">
-			 <h3 class="panel-title">Positive Kommentare</h3>
-			</div>
-			
-			<div id="comments-containerPositiv"></div>
-              <script type="text/javascript">
-
-					var w = 800,
-					h = 400;
-					
-					d3.json("http://134.91.18.177:5000/einteilungpos_kh1", function(error, data) {
-						
-						var comments = d3.select("#comments-containerPositiv").append("div")
-							.attr("class", "comments")
-							.selectAll("g")
-							.data(data)
-							.enter().append("div");
-
-														comments.append("a")
-                                                        .attr("href", function(d) { return d.url; })
-                                                        .attr("target", "_blank")
-                                                        .text(function(d) { return d.datum + "\n\n"; });
-
-                                                comments.append("text")
-                                                        .text(function(d) { return d.kommentar +" "; });
-                                        });
-				</script>
-            <!--</div>-->
-        </div>
-		</div>
-		
-		
-		
-	
-		<div class ="col-md-4">
-        <div class="panel panel-danger">
-		    <div class="panel-heading">
-            <h3 class="panel-title">Negative Kommentare</h3>
-            </div>
-            <div id="comments-containerNegativ"></div>
-              <script type="text/javascript">
-
-					var w = 800,
-					h = 400;
-					
-					d3.json("http://134.91.18.177:5000/einteilungneg_kh1", function(error, data) {
-						
-						var comments = d3.select("#comments-containerNegativ").append("div")
-							.attr("class", "comments")
-							.selectAll("g")
-							.data(data)
-							.enter().append("div");
-
-														comments.append("a")
-                                                        .attr("href", function(d) { return d.url; })
-                                                        .attr("target", "_blank")
-                                                        .text(function(d) { return d.datum + "\n\n"; });
-
-                                                comments.append("text")
-                                                        .text(function(d) { return d.kommentar +" "; });
-                                        });
-				</script>
-        </div>
-		</div>
-		
-		<div class ="col-md-4">
-		<div class="panel panel-default" >
-		<div class="panel-heading">
-            <h3 class="panel-title">Neutrale Kommentare</h3>
-            </div>
-            <div id="comments-containerNeutral"></div>
-              <script type="text/javascript">
-
-					var w = 800,
-					h = 400;
-					
-					d3.json("http://134.91.18.177:5000/einteilungneu_kh1", function(error, data) {
-						
-						var comments = d3.select("#comments-containerNeutral").append("div")
-							.attr("class", "comments")
-							.selectAll("g")
-							.data(data)
-							.enter().append("div");
-
-														comments.append("a")
-                                                        .attr("href", function(d) { return d.url; })
-                                                        .attr("target", "_blank")
-                                                        .text(function(d) { return d.datum + "\n\n"; });
-
-                                                comments.append("text")
-                                                        .text(function(d) { return d.kommentar +" "; });
-                                        });
-				</script>
-			</div>
-			</div>
-		
-		
-			
-			</div>
-						
-			</div>	
-			
-			</div> <!-- Ende row-->
+                </div> <!-- Ende row -->
 
 		
 			</div> <!-- Ende Page-Wrapper -->
@@ -293,6 +176,265 @@
 		<!-- /#wrapper -->
 		</div>
  
+    
+
+
+		
+	
+<script>
+//Collapsibles
+d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {
+
+//Gesamtbewertung Überschrift						
+						var bewertungenTop = d3.select("#headerBewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungenTop.append("text")
+							.text("Gesamtbewertung: ");
+						bewertungenTop.append("text")
+							.text(function(d) { return d.rating_gesamt; });
+						bewertungenTop.append("text")
+							.text(" %");
+							
+//Gesamtbewertung: Wert für Klinikbewertungen.de
+					
+						var bewertungen = d3.select("#bewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungen.append("text")
+							.text("Klinikbewertungen.de: \n");
+						bewertungen.append("text")
+							.text(function(d) { return d.rating_kb; });
+						bewertungen.append("text")
+							.text(" %");
+						
+//Gesamtbewertung: Wert für Kliniken.de						
+						var bewertungen2 = d3.select("#bewertung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						bewertungen2.append("text")
+							.text("Kliniken.de: ");
+						bewertungen2.append("text")
+							.text(function(d) { return d.rating_kl; });
+						bewertungen2.append("text")
+							.text(" %");
+							
+//Weiterempfehlungsrate Gesamtwert
+var weiterempfehlungTop = d3.select("#headerWeiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlungTop.append("text")
+							.text("Weiterempfehlungsrate: ");
+						weiterempfehlungTop.append("text")
+							.text(function(d) { return d.weiterempfehlung_gesamt; });
+						weiterempfehlungTop.append("text")
+							.text(" %");
+					
+						var weiterempfehlung = d3.select("#weiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlung.append("text")
+							.text("Klinikbewertungen.de: \n");
+						weiterempfehlung.append("text")
+							.text(function(d) { return d.weiterempfehlung_kb; });
+						weiterempfehlung.append("text")
+							.text(" %");
+						
+						
+						var weiterempfehlung2 = d3.select("#weiterempfehlung").append("div")
+							.attr("class", "bewertungen")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						
+						weiterempfehlung2.append("text")
+							.text("Weisse-Liste.de: ");
+						weiterempfehlung2.append("text")
+							.text(function(d) { return d.weiterempfehlung_wl; });
+						weiterempfehlung2.append("text")
+							.text(" %");							
+					});
+	
+// Mhhhhh Donut
+
+ var w = 250,
+	h = 250,
+	r = 100,
+	inner = 40,
+	color = d3.scale.ordinal()
+		.range([ "#40E140","#848484", "#CD0000"]);
+
+var total = 0;
+
+
+
+d3.json("http://134.91.18.177:5000/donut_kh1", function(error, data) {
+	  data.forEach(function(d) {
+		total += d.anzahl;
+	  });
+  
+dataObj = data;
+  
+
+var svg = d3.select("#dash1").append("svg")
+	.data(dataObj)
+		.attr("width", w)
+		.attr("height", h)
+	.append("g")
+		.attr("transform", "translate(" + r * 1.1 + "," + r * 1.1 + ")")
+
+
+
+var textTop = svg.append("text")
+	.attr("dy", ".35em")
+	.style("text-anchor", "middle")
+	.attr("class", "textTop")
+	.text("TOTAL")
+	.attr("y", -10),
+textBottom = svg.append("text")
+	.attr("dy", ".35em")
+	.style("text-anchor", "middle")
+	.attr("class", "textBottom")
+	.text(total)
+	.attr("y", 10);
+
+var arc = d3.svg.arc()
+	.innerRadius(inner)
+	.outerRadius(r);
+
+var arcOver = d3.svg.arc()
+	.innerRadius(inner + 7)
+	.outerRadius(r + 7);
+
+	var pie = d3.layout.pie()
+		.sort(null)
+		.value(function(d) { return d.anzahl; });
+
+var arcs = svg.selectAll(".arc")
+	.data(pie(dataObj))
+	.enter()
+		.append("g")
+			.attr("class", "arc")
+			.on("mouseover", function(d) {
+				d3.select(this).select("path").transition()
+					.duration(300)
+					.attr("d", arcOver)
+			
+				textTop.text(d3.select(this).datum().data.wertung)
+					.attr("y", -10);
+				textBottom.text(d3.select(this).datum().data.anzahl)
+					.attr("y", 10);
+			})
+			.on("mouseout", function(d) {
+				d3.select(this).select("path").transition()
+					.duration(200)
+					.attr("d", arc);
+			
+				textTop.text( "TOTAL" )
+					.attr("y", -10);
+				textBottom.text(total);
+			});
+
+arcs.append("path")
+	.attr("fill", function(d, i) { return color(i); } )
+	.attr("d", arc);
+
+var legendDonut = d3.select("#dash1").append("svg")
+	.attr("class", "legend")
+	.attr("width", r)
+	.attr("height", r * 2) <!-- passt sich beim löschen der beiden Zeilen (obere) an --> 
+	.selectAll("g")
+	.data(dataObj)
+	.enter().append("g")
+	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+legendDonut.append("rect")
+	.attr("width", 18)
+	.attr("height", 18)
+	.style("fill", function(d, i) { return color(i); });
+
+legendDonut.append("text")
+	.attr("x", 24)
+	.attr("y", 9)
+	.attr("dy", ".35em")
+	.text(function(d) { return d.wertung; });
+	});
+
+
+
+//Wordcloud
+   
+d3.json("http://134.91.18.177:5000/worthaeufigkeit_kh1", function(error, data) {	
+	
+		 var color = d3.scale.linear()
+            var color = d3.scale.linear()
+            .domain([0,1,2,3,4,5,6,10,15,20,100])
+			.range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+			
+		d3.layout.cloud().size([450, 350])
+				.words(data)
+				.rotate(0)
+				.fontSize(function(d) { return d.haeufigkeit + 15; })
+				.on("end", draw)
+				.start();
+
+		function draw(words) {
+			d3.select("#dash2").append("svg")
+					.attr("width", 500)
+					.attr("height", 220)
+					.attr("class", "wordcloud")
+					.append("g")
+					// without the transform, words would get cutoff to the left and top, they would
+					// appear outside of the SVG area
+					.attr("transform", "translate(100,130)")
+					.selectAll("text")
+					.data(words)
+					.enter().append("text")
+					.style("font-size", function(d) { return d.haeufigkeit + "px"; })
+					.style("fill", function(d, i) { return color(i); })
+					.attr("transform", function(d) {
+						return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+					})
+					.text(function(d) { return d.wort; });
+		}
+	});	
+	
+	
+d3.json("http://134.91.18.177:5000/collapsible_kh1", function(error, data) {
+						
+						var comments1 = d3.select("#wertKliniken.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+
+						comments1.append("text")
+							.text(function(d) { return d.rating_kb; });
+							
+						var comments2 = d3.select("#wertKlinikbewertungen.de").append("div")
+							.attr("class", "comments")
+							.selectAll("g")
+							.data(data)
+							.enter().append("div");
+						comments2.append("text")
+							.text(function(d) { return d.rating_kl; });
+					});
+</script>
 
 						  
 						  
